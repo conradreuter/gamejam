@@ -18,7 +18,7 @@ export default class Portal extends Entity {
   create() {
     this.sprite = Portal.layer.create(this.x, this.y, 'portal')
     this.timer = $game.time.create()
-    this.timer.loop(1000, this.spawnEnemy, this)
+    this.timer.loop(5000, this.spawnEnemy, this)
     this.timer.start()
   }
 

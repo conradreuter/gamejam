@@ -1,23 +1,24 @@
+import spritesheet from '../assets/player.png'
 import Entity from './Entity'
 import Wall from './Wall'
-import image from './player.png'
 
 export default class Player extends Entity {
 
   static preload() {
-    $game.load.image('player', image)
+    $game.load.spritesheet('player', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
   constructor() {
     super()
     this.lives = 3
-    this.speed = 120
+    this.speed = $constants.PLAYER_SPEED
   }
 
   create() {
     this.sprite = $game.add.sprite(this.x, this.y, 'player')
+    this.sprite.animations.add('walk', null, 2, true)
+    this.sprite.animations.play('walk')
     $game.physics.arcade.enable(this.sprite)
-    this.sprite.body.setCircle(this.sprite.width / 2)
   }
 
   update() {

@@ -1,12 +1,12 @@
+import spritesheet from '../assets/enemies/icy.png'
 import Entity from './Entity'
 import Wall from './Wall'
-import image from './enemy.png'
 
 export default class Enemy extends Entity {
 
   static preload() {
     Enemy.layer = $game.add.group()
-    $game.load.image('enemy', image)
+    $game.load.spritesheet('enemy', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
   constructor() {
@@ -17,8 +17,9 @@ export default class Enemy extends Entity {
   create() {
     this.sprite = Enemy.layer.create(this.x, this.y, 'enemy')
     this.sprite.data = this
+    this.sprite.animations.add('walk', null, 2, true)
+    this.sprite.animations.play('walk')
     $game.physics.arcade.enable(this.sprite)
-    this.sprite.body.setCircle(this.sprite.width / 2)
   }
 
   destroy() {
