@@ -1,12 +1,12 @@
+import spritesheet from '../assets/tower.png'
 import Entity from './Entity'
 import Projectile from './Projectile'
-import image from './tower.png'
 
 export default class Tower extends Entity {
 
   static preload() {
     Tower.layer = $game.add.group()
-    $game.load.spritesheet('tower', image, 16, 16, 5)
+    $game.load.spritesheet('tower', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
   constructor() {
