@@ -1,23 +1,24 @@
 import _ from 'lodash'
+import spritesheet from '../assets/items.png'
 import Enemy from './Enemy'
 import Entity from './Entity'
-import Path from './Path'
 import Player from './Player'
-import image from './item.png'
 
 export default class Item extends Entity {
 
   static preload() {
     Item.layer = $game.add.group()
-    $game.load.image('item', image)
+    $game.load.spritesheet('items', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
   constructor() {
+    super()
+    this.id = Math.random()
     this.type = chooseRandomType()
   }
 
   create() {
-    this.sprite = Item.layer.create(this.x, this.y, 'item')
+    this.sprite = Item.layer.create(this.x, this.y, 'items', this.type.frame)
     this.sprite.data = this
     $game.physics.arcade.enable(this.sprite)
   }
@@ -29,14 +30,15 @@ export default class Item extends Entity {
   update() {
     $game.physics.arcade.overlap(this.sprite, Enemy.layer, this.collideWithPlayerOrEnemy)
     $game.physics.arcade.overlap(this.sprite, $gameState.player, this.collideWithPlayerOrEnemy)
+    if (this.isCollected) $gameState.removeEntity(this)
   }
 
   collideWithPlayerOrEnemy(itemSprite, playerOrEnemySprite) {
-    if (itemSprite.data.type.applyEffect(playerOrEnemySprite.data)) {
-      $gameState.removeEntity(itemSprite.data)
-    }
+    const item = itemSprite.data
+    if (item.isCollected) return
+    const playerOrEnemy = playerOrEnemySprite.data
+    this.isCollected = item.type.applyEffect(playerOrEnemy)
   }
-
 }
 
 function chooseRandomType() {
@@ -63,7 +65,7 @@ Item.Life = class LifeItem {
   get doesAffectsPlayer() {
     return true
   }
-  
+
   applyEffect(playerOrEnemy) {
     playerOrEnemy.gainLife()
     return true
@@ -72,7 +74,7 @@ Item.Life = class LifeItem {
   get frame() {
     return 0
   }
-} 
+}
 
 Item.Coin = class CoinItem {
   get doesAffectsEnemy() {
@@ -82,12 +84,12 @@ Item.Coin = class CoinItem {
   get doesAffectsPlayer() {
     return true
   }
-  
+
   applyEffect(playerOrEnemy) {
     if (playerOrEnemy instanceof Player) {
       playerOrEnemy.collectCoin()
       return true
-    } 
+    }
     return false
   }
 
@@ -224,7 +226,7 @@ Item.Invise = class InviseItem {
     if (playerOrEnemy instanceof Player) {
       playerOrEnemy.inviseItem()
       return true
-    } 
+    }
     return false
   }
 
@@ -246,7 +248,7 @@ Item.Super = class SuperItem {
     if (playerOrEnemy instanceof Player) {
       playerOrEnemy.superItem()
       return true
-    } 
+    }
     return false
   }
 

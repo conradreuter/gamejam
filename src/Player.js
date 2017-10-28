@@ -25,7 +25,7 @@ export default class Player extends Entity {
     this.startTime = $game.time.now
     this.sprite = $game.add.sprite(this.x, this.y, 'player')
     this.sprite.data = this
-    this.sprite.animations.add('walk', null, 2, true)
+    this.sprite.animations.add('walk', null, 8, true)
     this.sprite.animations.play('walk')
     $game.physics.arcade.enable(this.sprite)
   }
@@ -34,13 +34,12 @@ export default class Player extends Entity {
     $game.physics.arcade.collide(this.sprite, Wall.layer)
     $game.physics.arcade.overlap(this.sprite, Path.layer, this.collide)
     const cursors = $game.input.keyboard.createCursorKeys()
-    //TODO: change speed to const
     if (this.accelerate > 0) {
       this.accelerate -= this.startTime - $game.time.now
-      this.speed = 240
+      this.speed = $constants.PLAYER_SPEED*2
     } else {
       this.accelerate = 0
-      this.speed = 120
+      this.speed = $constants.PLAYER_SPEED
     }
 
     if(this.invise > 0) this.invise -= this.startTime - $game.time.now

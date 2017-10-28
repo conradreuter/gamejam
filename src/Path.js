@@ -1,4 +1,5 @@
 import Entity from './Entity'
+import Item from './Item'
 
 export default class Path extends Entity {
 
@@ -29,10 +30,9 @@ export default class Path extends Entity {
   }
 
   spawnItem() {
-    if (Math.random() < $constants.ITEM_SPAWN_RATE) return
+    if (Math.random() > $constants.ITEM_SPAWN_RATE) return
     const item = new Item
     $gameState.addEntity(item)
-    item.sprite.x = this.sprite.x
-    item.sprite.y = this.sprite.y
+    item.sprite.alignIn(this.sprite, Phaser.CENTER)
   }
 }

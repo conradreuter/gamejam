@@ -1,13 +1,13 @@
 import _ from 'lodash'
+import spritesheet from '../assets/portal.png'
 import Enemy from './Enemy'
 import Entity from './Entity'
-import image from './portal.png'
 
 export default class Portal extends Entity {
 
   static preload() {
     Portal.layer = $game.add.group()
-    $game.load.image('portal', image)
+    $game.load.spritesheet('portal', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
   constructor() {
@@ -17,6 +17,8 @@ export default class Portal extends Entity {
 
   create() {
     this.sprite = Portal.layer.create(this.x, this.y, 'portal')
+    this.sprite.animations.add('spawn', null, 8, true)
+    this.sprite.animations.play('spawn')
     this.timer = $game.time.create()
     this.timer.loop(2000, this.spawnEnemy, this)
     this.timer.start()

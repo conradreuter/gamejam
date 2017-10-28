@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import Enemy from './Enemy'
+import Item from './Item'
 import Path from './Path'
 import Player from './Player'
 import Portal from './Portal'
@@ -32,6 +33,7 @@ export default class State {
     Wall.preload()
     Tower.preload()
     Portal.preload()
+    Item.preload()
     Enemy.preload()
     Player.preload()
     Projectile.preload()
@@ -70,10 +72,7 @@ function createInitialEntities(gameState) {
         gameState.player = entity
       }
       if (!(entity instanceof Wall)) {
-        const spawnsItems = !(
-          entity instanceof Wall ||
-          entity instanceof Portal
-        )
+        const spawnsItems = !(entity instanceof Portal)
         const path = new Path(spawnsItems)
         path.placeOnTile(column, row)
         path.left = leftPath
