@@ -3,21 +3,22 @@ import Enemy from './Enemy'
 import Entity from './Entity'
 import Path from './Path'
 import Player from './Player'
-import image from './item.png'
+import image from '../assets/items.png'
 
 export default class Item extends Entity {
 
   static preload() {
     Item.layer = $game.add.group()
-    $game.load.image('item', image)
+    $game.load.image('items', image)
   }
 
   constructor() {
+    super()
     this.type = chooseRandomType()
   }
 
   create() {
-    this.sprite = Item.layer.create(this.x, this.y, 'item')
+    this.sprite = Item.layer.create(this.x, this.y, 'items')
     this.sprite.data = this
     $game.physics.arcade.enable(this.sprite)
   }
