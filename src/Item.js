@@ -13,7 +13,6 @@ export default class Item extends Entity {
 
   constructor() {
     super()
-    this.id = Math.random()
     this.type = chooseRandomType()
   }
 
