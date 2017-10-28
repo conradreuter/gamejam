@@ -4,6 +4,7 @@ export default {
   TILE_SIZE: 64,
 
   ENEMY_LIVES: 10,
+  ENEMY_SPECIAL_RATE: .35,
   ENEMY_SPEED: 80,
 
   PLAYER_LIVES: 5,
