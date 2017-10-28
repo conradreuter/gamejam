@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import Player from './Player'
 import Enemy from './Enemy'
+import Player from './Player'
 import Portal from './Portal'
 import Wall from './Wall'
 import worldTxt from './world.txt'
@@ -48,7 +48,6 @@ export default class State {
   preload() {
     Wall.classPreload()
     Portal.classPreload()
-    Player.classPreload()
     Enemy.classPreload()
 
     for (let entity of this._entities) {
