@@ -23,6 +23,10 @@ module.exports = {
         test: /\.png$/,
         use: 'url-loader',
       },
+      {
+        test: /\.txt$/,
+        use: 'raw-loader',
+      },
     ],
   },
   output: {
