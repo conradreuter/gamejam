@@ -4,7 +4,7 @@ import image from './projectile.png'
 export default class Projectile extends Entity {
 
   static preload() {
-    $game.load.spritesheet('projectile', image, 8, 8, 5);
+    $game.load.spritesheet('projectile', image, 8, 8)
   }
 
   constructor(enemy, type) {
@@ -28,8 +28,7 @@ export default class Projectile extends Entity {
     if (this.enemy) {
       $game.physics.arcade.moveToObject(this.sprite, this.enemy.sprite, this.type.speed)
       if ($game.physics.arcade.intersects(this.sprite, this.enemy.sprite)) {
-        //TODO: change to loseLive
-        $gameState.removeEntity(this.enemy)
+        this.type.applyEffect(this.enemy)
         $gameState.removeEntity(this)
         return
       }
@@ -54,6 +53,9 @@ Projectile.Normal = class NormalProjectile {
     return $constants.NORMAL_PROJECTILE_SPEED
   }
 
+  applyEffect(enemy) {
+    enemy.loseLives(2)
+  }
 }
 
 Projectile.Ice = class IceProjectile {
@@ -64,6 +66,9 @@ Projectile.Ice = class IceProjectile {
 
   get speed() {
     return $constants.ICE_PROJECTILE_SPEED
+  }
+
+  applyEffect(enemy) {
   }
 }
 
@@ -76,6 +81,9 @@ Projectile.Fire = class FireProjectile {
   get speed() {
     return $constants.FIRE_PROJECTILE_SPEED
   }
+
+  applyEffect(enemy) {
+  }
 }
 
 Projectile.Freeze = class FreezeProjectile {
@@ -87,6 +95,9 @@ Projectile.Freeze = class FreezeProjectile {
   get speed() {
     return $constants.FREEZE_PROJECTILE_SPEED
   }
+
+  applyEffect(enemy) {
+  }
 }
 
 Projectile.Lightning = class LightningProjectile {
@@ -97,5 +108,8 @@ Projectile.Lightning = class LightningProjectile {
 
   get speed() {
     return $constants.LIGHTNING_PROJECTILE_SPEED
+  }
+
+  applyEffect(enemy) {
   }
 }

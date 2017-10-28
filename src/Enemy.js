@@ -11,7 +11,8 @@ export default class Enemy extends Entity {
 
   constructor() {
     super()
-    this.speed = 10
+    this.lives = $constants.ENEMY_LIVES
+    this.speed = $constants.ENEMY_SPEED
   }
 
   create() {
@@ -27,6 +28,7 @@ export default class Enemy extends Entity {
   }
 
   update() {
+    this.sprite.alpha = this.lives / $constants.ENEMY_LIVES
     if ($game.physics.arcade.intersects(this.sprite, $gameState.player.sprite)) {
       $gameState.player.loseLife()
       $gameState.removeEntity(this)
@@ -34,5 +36,10 @@ export default class Enemy extends Entity {
     }
     $game.physics.arcade.collide(this.sprite, Wall.layer)
     $game.physics.arcade.moveToObject(this.sprite, $gameState.player.sprite, this.speed)
+  }
+
+  loseLives(number) {
+    this.lives -= number
+    if (this.lives < 0) $gameState.removeEntity(this.enemy)
   }
 }

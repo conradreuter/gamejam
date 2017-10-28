@@ -1,5 +1,6 @@
 import spritesheet from '../assets/player.png'
 import Entity from './Entity'
+import Path from './Path'
 import Wall from './Wall'
 
 export default class Player extends Entity {
@@ -10,7 +11,7 @@ export default class Player extends Entity {
 
   constructor() {
     super()
-    this.lives = 3
+    this.lives = $constants.PLAYER_LIVES
     this.speed = $constants.PLAYER_SPEED
   }
 
@@ -23,6 +24,7 @@ export default class Player extends Entity {
 
   update() {
     $game.physics.arcade.collide(this.sprite, Wall.layer)
+    $game.physics.arcade.overlap(this.sprite, Path.layer, this.collide)
     const cursors = $game.input.keyboard.createCursorKeys()
     this.sprite.body.velocity = {
       x: this.speed * (cursors.right.isDown - cursors.left.isDown),
