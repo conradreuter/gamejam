@@ -23,6 +23,6 @@ export default class Portal extends Entity {
   }
 
   create() {
-    this.sprite = Portal.layer.create(this.x, this.y, 'portal')
+    //this.sprite = Portal.layer.create(this.x, this.y, 'portal')
   }
 }

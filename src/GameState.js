@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import Enemy from './Enemy'
+import Path from './Path'
 import Player from './Player'
 import Portal from './Portal'
 import Wall from './Wall'
@@ -9,40 +10,15 @@ export default class State {
 
   constructor() {
     _.bindAll(this, 'init', 'preload', 'create', 'update')
-    this._entities = []
+    this.entities = []
   }
 
-  get player() {
-    return this._player
+  addEntity(entity) {
+    this.entities.push(entity)
   }
 
   init() {
-    this._initEntities()
-  }
-
-  _initEntities() {
-    const lines = worldTxt.split(/\r?\n/)
-    let y = 0
-    for (let line of lines) {
-      let x = 0
-      for (let char of line) {
-        const entity = this._createEntity(char)
-        if (entity) {
-          entity.setPosition(x, y)
-          this._entities.push(entity)
-        }
-        x += $constants.TILE_SIZE
-      }
-      y += $constants.TILE_SIZE
-    }
-  }
-
-  _createEntity(char) {
-    switch (char) {
-      case '#': return new Wall
-      case 'S': return this._player = new Player
-      case 'P': return new Portal
-    }
+    initEntities(this)
   }
 
   preload() {
@@ -50,7 +26,7 @@ export default class State {
     Portal.classPreload()
     Enemy.classPreload()
 
-    for (let entity of this._entities) {
+    for (let entity of this.entities) {
       if (entity.preload) {
         entity.preload()
       }
@@ -59,7 +35,7 @@ export default class State {
 
   create() {
     $game.physics.startSystem(Phaser.Physics.ARCADE)
-    for (let entity of this._entities) {
+    for (let entity of this.entities) {
       if (entity.create) {
         entity.create()
       }
@@ -67,10 +43,58 @@ export default class State {
   }
 
   update() {
-    for (let entity of this._entities) {
+    for (let entity of this.entities) {
       if (entity.update) {
         entity.update()
       }
     }
+  }
+}
+
+function initEntities(gameState) {
+  const lines = worldTxt.split(/\r?\n/)
+  let row = 0
+  let topPaths = []
+  for (let line of lines) {
+    let column = 0
+    let leftPath = null
+    for (let char of line) {
+      const entity = createEntity(char)
+      if (entity) {
+        entity.setTile(column, row)
+        gameState.addEntity(entity)
+      }
+      if (entity instanceof Player) {
+        if (gameState.player) throw new Error('Multiple start points defined')
+        gameState.player = entity
+      }
+      if (!(entity instanceof Wall)) {
+        const path = new Path
+        path.setTile(column, row)
+        path.left = leftPath
+        if (leftPath) leftPath.right = path
+        leftPath = path
+        path.top = topPaths[column]
+        if (topPaths[column]) topPaths[column].bottom = path
+        topPaths[column] = path
+        gameState.addEntity(path)
+      } else {
+        leftPath = null
+        topPaths[column] = null
+      }
+      ++column
+    }
+    ++row
+  }
+  if (!gameState.player) throw new Error('No start points defined')
+}
+
+function createEntity(char) {
+  switch (char) {
+    case '#': return new Wall
+    case 'S': return new Player
+    case 'P': return new Portal
+    case ' ': return null
+    default: throw new Error(`Unknown entity in definition ('${char}')`)
   }
 }
