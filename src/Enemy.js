@@ -42,7 +42,7 @@ export default class Enemy extends Entity {
 
   loseLives(number) {
     this.lives -= number
-    if (this.lives < 0) $gameState.removeEntity(this.enemy)
+    if (this.lives <= 0) $gameState.removeEntity(this)
   }
 }
 
