@@ -10,11 +10,12 @@ export default class UI
 
     this._purchaseButtons.forEach(function(button)
     {
+      var id = button.id;
       button.onclick = function()
       {
         if(Wall.selection)
         {
-          Wall.selection.buildTower(-1);
+          Wall.selection.buildTower(id);
         }
       };
     });

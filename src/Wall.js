@@ -43,6 +43,6 @@ export default class Wall extends Entity {
   
   buildTower(towerType){
     //TODO do something
-    console.log('buildTower');
+    console.log('buildTower', towerType);
   }
 }
