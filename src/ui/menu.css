@@ -1,0 +1,9 @@
+html {
+  background-color: black;
+}
+.backpack.dropzone {
+  color: black;
+}
+
+canvas.phaserCanvas, div.menu { float: right; }
+div.menu { width: 300px;/*overflow: hidden;*/ }
