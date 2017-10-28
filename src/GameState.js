@@ -47,7 +47,6 @@ export default class State {
   preload() {
     Wall.classPreload()
     Portal.classPreload()
-    Player.classPreload()
     for (let entity of this._entities) {
       if (entity.preload) {
         entity.preload()
