@@ -1,6 +1,7 @@
-import sprite from '../assets/wall.png'
 import markerSprite from '../assets/marker.png'
+import sprite from '../assets/wall.png'
 import Entity from './Entity'
+import Tower from './Tower'
 
 export default class Wall extends Entity {
 
@@ -39,5 +40,14 @@ export default class Wall extends Entity {
     this.markerSprite.alpha = 0
     if (this.hovered) this.markerSprite.alpha = .5
     if (this.selected) this.markerSprite.alpha = 1
+  }
+
+  buildTower(type) {
+    if (this.tower) {
+      this.tower.changeType(type)
+    } else {
+      this.tower = new Tower(type)
+      $gameState.addEntity(this.tower)
+    }
   }
 }

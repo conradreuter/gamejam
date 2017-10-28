@@ -10,10 +10,10 @@ export default class Tower extends Entity {
     $game.load.spritesheet('tower', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
-  constructor() {
+  constructor(type) {
     super()
     this.timer = $game.time.create()
-    this.changeType(Tower.Normal)
+    this.changeType(type)
   }
 
   create() {

@@ -1,10 +1,10 @@
+import spritesheet from '../assets/projectiles.png'
 import Entity from './Entity'
-import image from './projectile.png'
 
 export default class Projectile extends Entity {
 
   static preload() {
-    $game.load.spritesheet('projectile', image, 8, 8)
+    $game.load.spritesheet('projectile', spritesheet, $constants.PROJECTILE_SIZE, $constants.PROJECTILE_SIZE)
   }
 
   constructor(enemy, type) {
