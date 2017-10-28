@@ -6,8 +6,9 @@ export default class Path extends Entity {
     Path.layer = $game.add.group()
   }
 
-  constructor() {
+  constructor(spawnsItems) {
     super()
+    this.spawnsItems = spawnsItems
     this.left = null
     this.right = null
     this.up = null
@@ -27,5 +28,15 @@ export default class Path extends Entity {
     this.sprite.width = $constants.TILE_SIZE
     this.sprite.height = $constants.TILE_SIZE
     $game.physics.arcade.enable(this.sprite)
+
+    if (this.spawnsItems) {
+      this.timer = $game.time.create(false)
+      this.spawnItem()
+    }
+  }
+
+  spawnItem() {
+    if (Math.random() < $constants.ITEM_SPAWN_RATE) return
+    // TODO spawn item
   }
 }

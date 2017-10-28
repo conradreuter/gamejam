@@ -72,7 +72,11 @@ function createInitialEntities(gameState) {
         gameState.player = entity
       }
       if (!(entity instanceof Wall)) {
-        const path = new Path
+        const spawnsItems = !(
+          entity instanceof Wall ||
+          entity instanceof Portal
+        )
+        const path = new Path(spawnsItems)
         path.placeOnTile(column, row)
         path.left = leftPath
         if (leftPath) leftPath.right = path
