@@ -30,6 +30,9 @@ export default class Path extends Entity {
 
   spawnItem() {
     if (Math.random() < $constants.ITEM_SPAWN_RATE) return
-    // TODO spawn item
+    const item = new Item
+    $gameState.addEntity(item)
+    item.sprite.x = this.sprite.x
+    item.sprite.y = this.sprite.y
   }
 }
