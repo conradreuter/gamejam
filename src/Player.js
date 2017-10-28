@@ -12,6 +12,7 @@ export default class Player extends Entity {
     super()
     this.lives = 3
     this.speed = $constants.PLAYER_SPEED
+    window.ui.setLives(this.lives)
   }
 
   create() {
@@ -33,5 +34,6 @@ export default class Player extends Entity {
   loseLife() {
     --this.lives
     console.log(`${this.lives} lives left`)
+    window.ui.setLives(this.lives)
   }
 }
