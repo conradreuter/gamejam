@@ -1,3 +1,4 @@
+import Enemy from './Enemy'
 import Entity from './Entity'
 import Projectile from './Projectile'
 import image from './tower.png'
@@ -31,8 +32,28 @@ export default class Tower extends Entity {
   }
 
   shoot() {
-    const projectile = new Projectile(this.type.createProjectile())
+    const enemy = this.chooseTarget()
+    if (!enemy) return
+    const projectile = new Projectile(enemy, this.type.createProjectile())
     $gameState.addEntity(projectile)
+    projectile.sprite.x = this.sprite.x
+    projectile.sprite.y = this.sprite.y
+  }
+
+  chooseTarget() {
+    let closestEnemy
+    let closestDistance = +Infinity
+    for (let entity of $gameState.entities) {
+      if (entity instanceof Enemy) {
+        const distance =  $game.physics.arcade.distanceBetween(this.sprite, entity.sprite)
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestEnemy = entity
+        }
+      }
+    }
+    if (closestDistance > this.type.radius) return null
+    return closestEnemy
   }
 }
 
@@ -46,7 +67,7 @@ Tower.Normal = class NormalTower {
     return new Projectile.Normal
   }
 
-  get shootingRadius() {
+  get radius() {
     return $constants.NORMALTOWER_SHOOTING_RADIUS
   }
 
@@ -65,7 +86,7 @@ Tower.Ice = class IceTower {
     return new Projectile.Ice
   }
 
-  get shootingRadius() {
+  get radius() {
     return $constants.ICETOWER_SHOOTING_RADIUS
   }
 
@@ -84,7 +105,7 @@ Tower.Fire = class FireTower {
     return new Projectile.Fire
   }
 
-  get shootingRadius() {
+  get radius() {
     return $constants.FIRETOWER_SHOOTING_RADIUS
   }
 
@@ -103,7 +124,7 @@ Tower.Freeze = class FreezeTower {
     return new Projectile.Freeze
   }
 
-  get shootingRadius() {
+  get radius() {
     return $constants.FREEZETOWER_SHOOTING_RADIUS
   }
 
@@ -122,7 +143,7 @@ Tower.Lightning = class LightningTower {
     return new Projectile.Lightning
   }
 
-  get shootingRadius() {
+  get radius() {
     return $constants.LIGHTNINGTOWER_SHOOTING_RADIUS
   }
 
