@@ -85,7 +85,7 @@ Item.Coin = class CoinItem {
   
   applyEffect(playerOrEnemy) {
     if (playerOrEnemy instanceof Player) {
-      player.collectCoin()
+      playerOrEnemy.collectCoin()
       return true
     } 
     return false
@@ -222,7 +222,7 @@ Item.Invise = class InviseItem {
 
   applyEffect(playerOrEnemy) {
     if (playerOrEnemy instanceof Player) {
-      player.inviseItem()
+      playerOrEnemy.inviseItem()
       return true
     } 
     return false
@@ -244,7 +244,7 @@ Item.Super = class SuperItem {
 
   applyEffect(playerOrEnemy) {
     if (playerOrEnemy instanceof Player) {
-      player.superItem()
+      playerOrEnemy.superItem()
       return true
     } 
     return false
