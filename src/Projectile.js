@@ -10,17 +10,12 @@ export default class Projectile extends Entity {
   constructor(enemy, type) {
     super()
     this.enemy = enemy
-    this.timer = $game.time.create()
-    this.changeType(type)
+    this.type = type
   }
 
   create() {
     this.sprite = $game.add.sprite(this.x, this.y, 'projectile', this.type.frame)
     $game.physics.arcade.enable(this.sprite)
-  }
-
-  changeType(type) {
-    this.type = type
   }
 
   update() {
@@ -43,73 +38,38 @@ export default class Projectile extends Entity {
   }
 }
 
-Projectile.Normal = class NormalProjectile {
-
-  get frame() {
-    return 0
-  }
-
-  get speed() {
-    return $constants.NORMAL_PROJECTILE_SPEED
-  }
-
+Projectile.Normal = {
   applyEffect(enemy) {
     enemy.loseLives(2)
-  }
+  },
+  frame: 0,
+  speed: 300,
 }
 
-Projectile.Ice = class IceProjectile {
-
-  get frame() {
-    return 1
-  }
-
-  get speed() {
-    return $constants.ICE_PROJECTILE_SPEED
-  }
-
+Projectile.Ice = {
   applyEffect(enemy) {
-  }
+  },
+  frame: 1,
+  speed: 300,
 }
 
-Projectile.Fire = class FireProjectile {
-
-  get frame() {
-    return 2
-  }
-
-  get speed() {
-    return $constants.FIRE_PROJECTILE_SPEED
-  }
-
+Projectile.Fire = {
   applyEffect(enemy) {
-  }
+  },
+  frame: 2,
+  speed: 300,
 }
 
-Projectile.Freeze = class FreezeProjectile {
-
-  get frame() {
-    return 3
-  }
-
-  get speed() {
-    return $constants.FREEZE_PROJECTILE_SPEED
-  }
-
+Projectile.Freeze = {
   applyEffect(enemy) {
-  }
+  },
+  frame: 3,
+  speed: 300,
 }
 
-Projectile.Lightning = class LightningProjectile {
-
-  get frame() {
-    return 4
-  }
-
-  get speed() {
-    return $constants.LIGHTNING_PROJECTILE_SPEED
-  }
-
+Projectile.Lightning = {
   applyEffect(enemy) {
-  }
+  },
+  frame: 4,
+  speed: 300,
 }

@@ -30,7 +30,7 @@ export default class Enemy extends Entity {
   }
 
   update() {
-    this.sprite.alpha = this.lives / $constants.ENEMY_LIVES
+    this.sprite.alpha = .5 + .5 * (this.lives / $constants.ENEMY_LIVES)
     if ($game.physics.arcade.intersects(this.sprite, $gameState.player.sprite)) {
       $gameState.player.loseLife()
       $gameState.removeEntity(this)

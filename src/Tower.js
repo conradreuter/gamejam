@@ -13,7 +13,7 @@ export default class Tower extends Entity {
   constructor() {
     super()
     this.timer = $game.time.create()
-    this.changeType(new Tower.Normal)
+    this.changeType(Tower.Normal)
   }
 
   create() {
@@ -34,10 +34,9 @@ export default class Tower extends Entity {
   shoot() {
     const enemy = this.chooseTarget()
     if (!enemy) return
-    const projectile = new Projectile(enemy, this.type.createProjectile())
+    const projectile = new Projectile(enemy, this.type.projectileType)
     $gameState.addEntity(projectile)
-    projectile.sprite.x = this.sprite.x
-    projectile.sprite.y = this.sprite.y
+    projectile.sprite.alignIn(this.sprite, Phaser.CENTER)
   }
 
   chooseTarget() {
@@ -57,97 +56,37 @@ export default class Tower extends Entity {
   }
 }
 
-Tower.Normal = class NormalTower {
-
-  get frame() {
-    return 0
-  }
-
-  createProjectile() {
-    return new Projectile.Normal
-  }
-
-  get radius() {
-    return $constants.NORMALTOWER_RADIUS
-  }
-
-  get cooldown() {
-    return $constants.NORMALTOWER_COOLDOWN
-  }
+Tower.Normal = {
+  cooldown: 500,
+  frame: 0,
+  projectileType: Projectile.Normal,
+  radius: 300,
 }
 
-Tower.Ice = class IceTower {
-
-  get frame() {
-    return 1
-  }
-
-  createProjectile() {
-    return new Projectile.Ice
-  }
-
-  get radius() {
-    return $constants.ICETOWER_RADIUS
-  }
-
-  get cooldown() {
-    return $constants.ICETOWER_COOLDOWN
-  }
+Tower.Ice = {
+  cooldown: 500,
+  frame: 1,
+  projectileType: Projectile.Ice,
+  radius: 300,
 }
 
-Tower.Fire = class FireTower {
-
-  get frame() {
-    return 2
-  }
-
-  createProjectile() {
-    return new Projectile.Fire
-  }
-
-  get radius() {
-    return $constants.FIRETOWER_RADIUS
-  }
-
-  get cooldown() {
-    return $constants.FIRETOWER_COOLDOWN
-  }
+Tower.Fire = {
+  cooldown: 500,
+  frame: 2,
+  projectileType: Projectile.Fire,
+  radius: 300,
 }
 
-Tower.Freeze = class FreezeTower {
-
-  get frame() {
-    return 3
-  }
-
-  createProjectile() {
-    return new Projectile.Freeze
-  }
-
-  get radius() {
-    return $constants.FREEZETOWER_RADIUS
-  }
-
-  get cooldown() {
-    return $constants.FREEZETOWER_COOLDOWN
-  }
+Tower.Lightning = {
+  cooldown: 500,
+  frame: 4,
+  projectileType: Projectile.Lightning,
+  radius: 300,
 }
 
-Tower.Lightning = class LightningTower {
-
-  get frame() {
-    return 4
-  }
-
-  createProjectile() {
-    return new Projectile.Lightning
-  }
-
-  get radius() {
-    return $constants.LIGHTNINGTOWER_RADIUS
-  }
-
-  get cooldown() {
-    return $constants.LIGHTNINGTOWER_COOLDOWN
-  }
+Tower.Freeze = {
+  cooldown: 500,
+  frame: 3,
+  projectileType: Projectile.Freeze,
+  radius: 300,
 }
