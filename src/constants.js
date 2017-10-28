@@ -1,1 +1,3 @@
-export const TILE_SIZE = 16
+export default {
+  TILE_SIZE: 16,
+}

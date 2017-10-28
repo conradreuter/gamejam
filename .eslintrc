@@ -2,7 +2,10 @@
   "env": { "browser": true },
   "extends": ["eslint:recommended"],
   "globals": {
-    "Phaser": false
+    "Phaser": false,
+    "$constants": false,
+    "$game": false,
+    "$gameState": false
   },
   "parser": "babel-eslint",
   "plugins": ["async-await", "import"],

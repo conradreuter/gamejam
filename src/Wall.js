@@ -3,11 +3,20 @@ import image from './wall.png'
 
 export default class Wall extends Entity {
 
+  static classPreload() {
+    Wall.layer = $game.add.group()
+  }
+
   preload() {
-    this._game.load.image('wall', image)
+    $game.load.image('wall', image)
   }
 
   create() {
-    this.sprite = this._game.add.sprite(this.x, this.y, 'wall')
+    this.sprite = Wall.layer.create(this.x, this.y, 'wall')
+    $game.physics.arcade.enable(this.sprite)
+    this.sprite.body.immovable = true
+  }
+
+  update() {
   }
 }
