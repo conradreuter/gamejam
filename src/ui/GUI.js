@@ -1,4 +1,5 @@
 import Wall from '../Wall'
+import Tower from '../Tower'
 
 export default class UI 
 {
@@ -6,7 +7,7 @@ export default class UI
   {
     this._purchaseButtons = Array.from($('.purchase-tower'));
     this.resetValues();
-    this.deactivatePurchaseButton(1);
+    //this.deactivatePurchaseButton(1);
 
     this._purchaseButtons.forEach(function(button)
     {
@@ -15,7 +16,15 @@ export default class UI
       {
         if(Wall.selection)
         {
-          Wall.selection.buildTower(id);
+          switch(id)
+          {
+            case "normal": {Wall.selection.buildTower(Tower.Normal); break}
+            case "ice": {Wall.selection.buildTower(Tower.Ice); break}
+            case "fire": {Wall.selection.buildTower(Tower.Fire); break}
+            case "lightning": {Wall.selection.buildTower(Tower.Lightning); break}
+            case "freeze": {Wall.selection.buildTower(Tower.Freeze); break}
+          }
+          
         }
       };
     });
@@ -27,16 +36,16 @@ export default class UI
     this.setLives(0);
     this.setCoins(0);
     this.setKills(0);
-    this.setTowerPrice("tower_0", 0);
-    this.setTowerPrice("tower_1", 0);
-    this.setTowerPrice("tower_2", 0);
-    this.setTowerPrice("tower_3", 0);
-    this.setTowerPrice("tower_4", 0);
-    this.setTowerExperience("progress_0", 0);
+    this.setTowerPrice(0, 0);
+    this.setTowerPrice(1, 0);
+    this.setTowerPrice(2, 0);
+    this.setTowerPrice(3, 0);
+    this.setTowerPrice(4, 0);
+    /*this.setTowerExperience("progress_0", 0);
     this.setTowerExperience("progress_1", 0);
     this.setTowerExperience("progress_2", 0);
     this.setTowerExperience("progress_3", 0);
-    this.setTowerExperience("progress_4", 0);
+    this.setTowerExperience("progress_4", 0);*/
   }
   
   setLives(value)
@@ -54,9 +63,11 @@ export default class UI
     $('#kills').text(value);
   }
   
-  setTowerPrice(towertype, value)
+  setTowerPrice(index, value)
   {
-    $('#'+towertype).text(value);
+    var button = this._purchaseButtons[index];
+    var label = $(button).find('a');
+    label.text(value);
   }
   
   setTowerExperience(towertype, value)
@@ -71,7 +82,7 @@ export default class UI
     });
   }
   
-  activatePurchaseButton(index)
+  /*activatePurchaseButton(index)
   {
     this._purchaseButtons[index].attr("disabled", false);
   }
@@ -80,5 +91,5 @@ export default class UI
   {
     console.log($(this._purchaseButtons[index]));
     console.log($(this._purchaseButtons[index]).attr("disabled"));
-  }
+  }*/
 }

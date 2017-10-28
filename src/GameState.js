@@ -42,9 +42,7 @@ export default class State {
     createInitialEntities(this)
 
     // TODO remove
-    const tower = new Tower
-    tower.placeOnTile(3, 3)
-    this.addEntity(tower)
+    this.entities[0].buildTower(Tower.Normal)
   }
 
   update() {
