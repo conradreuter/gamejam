@@ -48,6 +48,7 @@ export default class Wall extends Entity {
     } else {
       this.tower = new Tower(type)
       $gameState.addEntity(this.tower)
+      this.tower.sprite.alignIn(this.sprite, Phaser.CENTER)
     }
   }
 }
