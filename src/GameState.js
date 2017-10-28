@@ -48,7 +48,7 @@ export default class State {
 function createInitialEntities(gameState) {
   const lines = worldTxt.split(/\r?\n/)
   let row = 0
-  let topPaths = []
+  let upPaths = []
   for (let line of lines) {
     let column = 0
     let leftPath = null
@@ -68,13 +68,13 @@ function createInitialEntities(gameState) {
         path.left = leftPath
         if (leftPath) leftPath.right = path
         leftPath = path
-        path.top = topPaths[column]
-        if (topPaths[column]) topPaths[column].bottom = path
-        topPaths[column] = path
+        path.up = upPaths[column]
+        if (upPaths[column]) upPaths[column].down = path
+        upPaths[column] = path
         gameState.addEntity(path)
       } else {
         leftPath = null
-        topPaths[column] = null
+        upPaths[column] = null
       }
       ++column
     }

@@ -1,4 +1,6 @@
 import Entity from './Entity'
+import Enemy from './Enemy'
+import Path from './Path'
 import Wall from './Wall'
 import image from './player.png'
 
@@ -11,25 +13,22 @@ export default class Player extends Entity {
   constructor() {
     super()
     this.lives = 3
-    this.speed = 180
+    this.speed = 120
   }
 
   create() {
     this.sprite = $game.add.sprite(this.x, this.y, 'player')
     $game.physics.arcade.enable(this.sprite)
-    const size = this.sprite.width * .75
-    const offset = (this.sprite.width - size) / 2
-    this.sprite.body.setSize(size, size, offset, offset)
+    this.sprite.body.setCircle(this.sprite.width / 2)
   }
 
   update() {
+    $game.physics.arcade.collide(this.sprite, Wall.layer)
     const cursors = $game.input.keyboard.createCursorKeys()
     this.sprite.body.velocity = {
       x: this.speed * (cursors.right.isDown - cursors.left.isDown),
       y: this.speed * (cursors.down.isDown - cursors.up.isDown),
     }
-
-    $game.physics.arcade.collide(this.sprite, Wall.layer)
   }
 
   loseLife() {

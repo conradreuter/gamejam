@@ -9,9 +9,16 @@ export default class Enemy extends Entity {
     $game.load.image('enemy', image)
   }
 
+  constructor() {
+    super()
+    this.speed = 10
+  }
+
   create() {
     this.sprite = Enemy.layer.create(this.x, this.y, 'enemy')
+    this.sprite.data = this
     $game.physics.arcade.enable(this.sprite)
+    this.sprite.body.setCircle(this.sprite.width / 2)
   }
 
   destroy() {
@@ -19,12 +26,12 @@ export default class Enemy extends Entity {
   }
 
   update() {
+    if ($game.physics.arcade.intersects(this.sprite, $gameState.player.sprite)) {
+      $gameState.player.loseLife()
+      $gameState.removeEntity(this)
+      return
+    }
     $game.physics.arcade.collide(this.sprite, Wall.layer)
-    $game.physics.arcade.overlap(this.sprite, $gameState.player.sprite, this.damagePlayer, null, this)
-  }
-
-  damagePlayer() {
-    $gameState.removeEntity(this)
-    $gameState.player.loseLife()
+    $game.physics.arcade.moveToObject(this.sprite, $gameState.player.sprite, this.speed)
   }
 }
