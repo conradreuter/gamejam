@@ -1,3 +1,4 @@
+import Wall from '../Wall'
 
 export default class UI 
 {
@@ -9,7 +10,13 @@ export default class UI
 
     this._purchaseButtons.forEach(function(button)
     {
-      button.onclick = function(){console.log("hello world");};
+      button.onclick = function()
+      {
+        if(Wall.selection)
+        {
+          Wall.selection.buildTower(-1);
+        }
+      };
     });
     
   }

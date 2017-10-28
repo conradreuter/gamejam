@@ -40,4 +40,9 @@ export default class Wall extends Entity {
     if (this.hovered) this.markerSprite.alpha = .5
     if (this.selected) this.markerSprite.alpha = 1
   }
+  
+  buildTower(towerType){
+    //TODO do something
+    console.log('buildTower');
+  }
 }
