@@ -7,14 +7,16 @@ export default class Projectile extends Entity {
     $game.load.spritesheet('projectile', image, 8, 8, 5);
   }
 
-  constructor(type) {
+  constructor(enemy, type) {
     super()
+    this.enemy = enemy
     this.timer = $game.time.create()
     this.changeType(type)
   }
 
   create() {
     this.sprite = $game.add.sprite(this.x, this.y, 'projectile', this.type.frame)
+    $game.physics.arcade.enable(this.sprite)
   }
 
   changeType(type) {
@@ -23,8 +25,22 @@ export default class Projectile extends Entity {
 
   update() {
     this.sprite.frame = this.type.frame
+    if (this.enemy) {
+      $game.physics.arcade.moveToObject(this.sprite, this.enemy.sprite, this.type.speed)
+      if ($game.physics.arcade.intersects(this.sprite, this.enemy.sprite)) {
+        //TODO: change to loseLive
+        $gameState.removeEntity(this.enemy)
+        $gameState.removeEntity(this)
+        return
+      }
+    } else {
+      $gameState.removeEntity(this)
+    }
 
-    // $game.physics.arcade.moveToObject(this.sprite, $gameState.player.sprite, this.speed)
+  }
+
+  destroy() {
+    this.sprite.destroy()
   }
 }
 
@@ -34,9 +50,10 @@ Projectile.Normal = class NormalProjectile {
     return 0
   }
 
-  get lifetime() {
-    return $constants.NORMAL_PROJECTILE_LIFETIME
+  get speed() {
+    return $constants.NORMAL_PROJECTILE_SPEED
   }
+
 }
 
 Projectile.Ice = class IceProjectile {
@@ -45,8 +62,8 @@ Projectile.Ice = class IceProjectile {
     return 1
   }
 
-  get lifetime() {
-    return $constants.ICE_PROJECTILE_LIFETIME
+  get speed() {
+    return $constants.ICE_PROJECTILE_SPEED
   }
 }
 
@@ -56,8 +73,8 @@ Projectile.Fire = class FireProjectile {
     return 2
   }
 
-  get lifetime() {
-    return $constants.FIRE_PROJECTILE_LIFETIME
+  get speed() {
+    return $constants.FIRE_PROJECTILE_SPEED
   }
 }
 
@@ -67,8 +84,8 @@ Projectile.Freeze = class FreezeProjectile {
     return 3
   }
 
-  get lifetime() {
-    return $constants.FREEZE_PROJECTILE_LIFETIME
+  get speed() {
+    return $constants.FREEZE_PROJECTILE_SPEED
   }
 }
 
@@ -78,7 +95,7 @@ Projectile.Lightning = class LightningProjectile {
     return 4
   }
 
-  get lifetime() {
-    return $constants.LIGHTNING_PROJECTILE_LIFETIME
+  get speed() {
+    return $constants.LIGHTNING_PROJECTILE_SPEED
   }
 }

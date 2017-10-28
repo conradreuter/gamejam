@@ -1,4 +1,5 @@
 import spritesheet from '../assets/tower.png'
+import Enemy from './Enemy'
 import Entity from './Entity'
 import Projectile from './Projectile'
 
@@ -31,8 +32,28 @@ export default class Tower extends Entity {
   }
 
   shoot() {
-    const projectile = new Projectile(this.type.createProjectile())
+    const enemy = this.chooseTarget()
+    if (!enemy) return
+    const projectile = new Projectile(enemy, this.type.createProjectile())
     $gameState.addEntity(projectile)
+    projectile.sprite.x = this.sprite.x
+    projectile.sprite.y = this.sprite.y
+  }
+
+  chooseTarget() {
+    let closestEnemy
+    let closestDistance = +Infinity
+    for (let entity of $gameState.entities) {
+      if (entity instanceof Enemy) {
+        const distance =  $game.physics.arcade.distanceBetween(this.sprite, entity.sprite)
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestEnemy = entity
+        }
+      }
+    }
+    if (closestDistance > this.type.radius) return null
+    return closestEnemy
   }
 }
 
@@ -46,8 +67,8 @@ Tower.Normal = class NormalTower {
     return new Projectile.Normal
   }
 
-  get shootingRadius() {
-    return $constants.NORMALTOWER_SHOOTING_RADIUS
+  get radius() {
+    return $constants.NORMALTOWER_RADIUS
   }
 
   get cooldown() {
@@ -65,8 +86,8 @@ Tower.Ice = class IceTower {
     return new Projectile.Ice
   }
 
-  get shootingRadius() {
-    return $constants.ICETOWER_SHOOTING_RADIUS
+  get radius() {
+    return $constants.ICETOWER_RADIUS
   }
 
   get cooldown() {
@@ -84,8 +105,8 @@ Tower.Fire = class FireTower {
     return new Projectile.Fire
   }
 
-  get shootingRadius() {
-    return $constants.FIRETOWER_SHOOTING_RADIUS
+  get radius() {
+    return $constants.FIRETOWER_RADIUS
   }
 
   get cooldown() {
@@ -103,8 +124,8 @@ Tower.Freeze = class FreezeTower {
     return new Projectile.Freeze
   }
 
-  get shootingRadius() {
-    return $constants.FREEZETOWER_SHOOTING_RADIUS
+  get radius() {
+    return $constants.FREEZETOWER_RADIUS
   }
 
   get cooldown() {
@@ -122,8 +143,8 @@ Tower.Lightning = class LightningTower {
     return new Projectile.Lightning
   }
 
-  get shootingRadius() {
-    return $constants.LIGHTNINGTOWER_SHOOTING_RADIUS
+  get radius() {
+    return $constants.LIGHTNINGTOWER_RADIUS
   }
 
   get cooldown() {
