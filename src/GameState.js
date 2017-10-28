@@ -3,6 +3,8 @@ import Enemy from './Enemy'
 import Path from './Path'
 import Player from './Player'
 import Portal from './Portal'
+import Projectile from './Projectile'
+import Tower from './Tower'
 import Wall from './Wall'
 import worldTxt from './world.txt'
 
@@ -28,14 +30,21 @@ export default class State {
   preload() {
     Path.preload()
     Wall.preload()
+    Tower.preload()
     Portal.preload()
     Enemy.preload()
     Player.preload()
+    Projectile.preload()
   }
 
   create() {
     $game.physics.startSystem(Phaser.Physics.ARCADE)
     createInitialEntities(this)
+
+    // TODO remove
+    const tower = new Tower
+    tower.placeOnTile(3, 3)
+    this.addEntity(tower)
   }
 
   update() {

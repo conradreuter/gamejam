@@ -1,11 +1,12 @@
 import Entity from './Entity'
-import image from './tower.png'
 import Projectile from './Projectile'
+import image from './tower.png'
 
 export default class Tower extends Entity {
 
-  static classPreload() {
+  static preload() {
     Tower.layer = $game.add.group()
+    $game.load.spritesheet('tower', image, 16, 16, 5)
   }
 
   constructor() {
@@ -14,10 +15,6 @@ export default class Tower extends Entity {
     this.changeType(new Tower.Normal)
   }
 
-  preload() {
-    $game.load.spritesheet('tower', image, 16, 16, 5);
-  }
-  
   create() {
     this.sprite = $game.add.sprite(this.x, this.y, 'tower', this.type.frame)
   }
@@ -32,22 +29,19 @@ export default class Tower extends Entity {
   update() {
     this.sprite.frame = this.type.frame
   }
-  
+
   shoot() {
     const projectile = new Projectile(this.type.createProjectile())
-    console.log($gameState)
     $gameState.addEntity(projectile)
-
   }
-
 }
 
 Tower.Normal = class NormalTower {
-  
+
   get frame() {
     return 0
   }
-  
+
   createProjectile() {
     return new Projectile.Normal
   }
@@ -62,11 +56,11 @@ Tower.Normal = class NormalTower {
 }
 
 Tower.Ice = class IceTower {
-  
+
   get frame() {
     return 1
   }
-  
+
   createProjectile() {
     return new Projectile.Ice
   }
@@ -81,11 +75,11 @@ Tower.Ice = class IceTower {
 }
 
 Tower.Fire = class FireTower {
-  
+
   get frame() {
     return 2
   }
-  
+
   createProjectile() {
     return new Projectile.Fire
   }
@@ -100,11 +94,11 @@ Tower.Fire = class FireTower {
 }
 
 Tower.Freeze = class FreezeTower {
-  
+
   get frame() {
     return 3
   }
-  
+
   createProjectile() {
     return new Projectile.Freeze
   }
@@ -119,11 +113,11 @@ Tower.Freeze = class FreezeTower {
 }
 
 Tower.Lightning = class LightningTower {
-  
+
   get frame() {
     return 4
   }
-  
+
   createProjectile() {
     return new Projectile.Lightning
   }

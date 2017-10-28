@@ -1,6 +1,4 @@
 import Entity from './Entity'
-import Enemy from './Enemy'
-import Path from './Path'
 import Wall from './Wall'
 import image from './player.png'
 
