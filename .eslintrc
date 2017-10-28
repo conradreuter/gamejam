@@ -1,0 +1,20 @@
+{
+  "env": { "browser": true },
+  "extends": ["eslint:recommended"],
+  "globals": {
+    "Phaser": false
+  },
+  "parser": "babel-eslint",
+  "plugins": ["async-await", "import"],
+  "rules": {
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "sort-keys": ["error", "asc", { "natural": true }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/order": ["error"],
+    "import/prefer-default-export": ["error"]
+  },
+  "settings": {
+    "import/resolver": "webpack"
+  }
+}
