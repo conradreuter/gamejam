@@ -30,7 +30,6 @@ export default class Path extends Entity {
   }
 
   spawnItem() {
-    console.log('blubb')
     if (Math.random() > $constants.ITEM_SPAWN_RATE) return
     const item = new Item
     $gameState.addEntity(item)

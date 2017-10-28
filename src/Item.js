@@ -1,15 +1,14 @@
 import _ from 'lodash'
+import spritesheet from '../assets/items.png'
 import Enemy from './Enemy'
 import Entity from './Entity'
-import Path from './Path'
 import Player from './Player'
-import image from '../assets/items.png'
 
 export default class Item extends Entity {
 
   static preload() {
     Item.layer = $game.add.group()
-    $game.load.image('items', image)
+    $game.load.spritesheet('items', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
   constructor() {
@@ -18,7 +17,7 @@ export default class Item extends Entity {
   }
 
   create() {
-    this.sprite = Item.layer.create(this.x, this.y, 'items')
+    this.sprite = Item.layer.create(this.x, this.y, 'items', this.type.frame)
     this.sprite.data = this
     $game.physics.arcade.enable(this.sprite)
   }
@@ -64,7 +63,7 @@ Item.Life = class LifeItem {
   get doesAffectsPlayer() {
     return true
   }
-  
+
   applyEffect(playerOrEnemy) {
     playerOrEnemy.gainLife()
     return true
@@ -73,7 +72,7 @@ Item.Life = class LifeItem {
   get frame() {
     return 0
   }
-} 
+}
 
 Item.Coin = class CoinItem {
   get doesAffectsEnemy() {
@@ -83,12 +82,12 @@ Item.Coin = class CoinItem {
   get doesAffectsPlayer() {
     return true
   }
-  
+
   applyEffect(playerOrEnemy) {
     if (playerOrEnemy instanceof Player) {
       playerOrEnemy.collectCoin()
       return true
-    } 
+    }
     return false
   }
 
@@ -225,7 +224,7 @@ Item.Invise = class InviseItem {
     if (playerOrEnemy instanceof Player) {
       playerOrEnemy.inviseItem()
       return true
-    } 
+    }
     return false
   }
 
@@ -247,7 +246,7 @@ Item.Super = class SuperItem {
     if (playerOrEnemy instanceof Player) {
       playerOrEnemy.superItem()
       return true
-    } 
+    }
     return false
   }
 
