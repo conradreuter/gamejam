@@ -3,9 +3,15 @@ export default class UI
 {
   constructor()
   {
-    this._purchaseButtons = $('.purchase-tower');
+    this._purchaseButtons = Array.from($('.purchase-tower'));
     this.resetValues();
     this.deactivatePurchaseButton(1);
+
+    this._purchaseButtons.forEach(function(button)
+    {
+      button.onclick = function(){console.log("hello world");};
+    });
+    
   }
   
   resetValues()
@@ -59,7 +65,6 @@ export default class UI
   
   activatePurchaseButton(index)
   {
-    
     this._purchaseButtons[index].attr("disabled", false);
   }
   
@@ -68,6 +73,4 @@ export default class UI
     console.log($(this._purchaseButtons[index]));
     console.log($(this._purchaseButtons[index]).attr("disabled"));
   }
-  
-  
 }
