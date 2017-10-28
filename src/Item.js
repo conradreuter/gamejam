@@ -13,6 +13,7 @@ export default class Item extends Entity {
 
   constructor() {
     super()
+    this.id = Math.random()
     this.type = chooseRandomType()
   }
 
@@ -29,13 +30,14 @@ export default class Item extends Entity {
   update() {
     $game.physics.arcade.overlap(this.sprite, Enemy.layer, this.collideWithPlayerOrEnemy)
     $game.physics.arcade.overlap(this.sprite, $gameState.player, this.collideWithPlayerOrEnemy)
+    if (this.isCollected) $gameState.removeEntity(this)
   }
 
   collideWithPlayerOrEnemy(itemSprite, playerOrEnemySprite) {
     const item = itemSprite.data
+    if (item.isCollected) return
     const playerOrEnemy = playerOrEnemySprite.data
-    const hadEffect = item.type.applyEffect(playerOrEnemy)
-    if (hadEffect) $gameState.removeEntity(item)
+    this.isCollected = item.type.applyEffect(playerOrEnemy)
   }
 }
 
