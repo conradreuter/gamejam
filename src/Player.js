@@ -10,6 +10,7 @@ export default class Player extends Entity {
 
   constructor() {
     super()
+    this.lives = 3
     this.speed = 180
   }
 
@@ -29,5 +30,10 @@ export default class Player extends Entity {
     }
 
     $game.physics.arcade.collide(this.sprite, Wall.layer)
+  }
+
+  loseLife() {
+    --this.lives
+    console.log(`${this.lives} lives left`)
   }
 }

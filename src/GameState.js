@@ -9,16 +9,20 @@ import worldTxt from './world.txt'
 export default class State {
 
   constructor() {
-    _.bindAll(this, 'init', 'preload', 'create', 'update')
+    _.bindAll(this, 'preload', 'create', 'update')
     this.entities = []
   }
 
   addEntity(entity) {
     this.entities.push(entity)
+    entity.create()
   }
 
-  init() {
-    initEntities(this)
+  removeEntity(entity) {
+    const index = this.entities.indexOf(entity)
+    if (index === -1) return
+    this.entities.splice(index, 1)
+    if (entity.destroy) entity.destroy()
   }
 
   preload() {
@@ -31,23 +35,17 @@ export default class State {
 
   create() {
     $game.physics.startSystem(Phaser.Physics.ARCADE)
-    for (let entity of this.entities) {
-      if (entity.create) {
-        entity.create()
-      }
-    }
+    createInitialEntities(this)
   }
 
   update() {
     for (let entity of this.entities) {
-      if (entity.update) {
-        entity.update()
-      }
+      if (entity.update) entity.update()
     }
   }
 }
 
-function initEntities(gameState) {
+function createInitialEntities(gameState) {
   const lines = worldTxt.split(/\r?\n/)
   let row = 0
   let topPaths = []
@@ -57,7 +55,7 @@ function initEntities(gameState) {
     for (let char of line) {
       const entity = createEntity(char)
       if (entity) {
-        entity.setTile(column, row)
+        entity.placeOnTile(column, row)
         gameState.addEntity(entity)
       }
       if (entity instanceof Player) {
@@ -66,7 +64,7 @@ function initEntities(gameState) {
       }
       if (!(entity instanceof Wall)) {
         const path = new Path
-        path.setTile(column, row)
+        path.placeOnTile(column, row)
         path.left = leftPath
         if (leftPath) leftPath.right = path
         leftPath = path
