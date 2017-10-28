@@ -15,13 +15,6 @@ export default class Path extends Entity {
     this.down = null
   }
 
-  get isTurnPoint() {
-    return !(
-      (this.left && this.right && !this.up && !this.down) ||
-      (!this.left && !this.right && this.up && this.down)
-    )
-  }
-
   create() {
     this.sprite = Path.layer.create(this.x, this.y, null)
     this.sprite.data = this
