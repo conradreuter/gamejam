@@ -28,8 +28,7 @@ export default class Projectile extends Entity {
     if (this.enemy) {
       $game.physics.arcade.moveToObject(this.sprite, this.enemy.sprite, this.type.speed)
       if ($game.physics.arcade.intersects(this.sprite, this.enemy.sprite)) {
-        //TODO: change to loseLive
-        $gameState.removeEntity(this.enemy)
+        this.enemy.loseLife()
         $gameState.removeEntity(this)
         return
       }
