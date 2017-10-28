@@ -7,9 +7,7 @@
 <body>  
 
     <div class="menu">
-      
-      
-      
+
       <div class="ui inverted segment">
         
         <div class="ui horizontal inverted segment">
@@ -18,8 +16,9 @@
         </div>
       </div>
         
-        <div class="ui inverted segments">
-          <div class="ui labeled button">
+        <div class="ui grid">
+          <div class="two column row">
+            <div class="ui labeled button">
             <div class="ui label">
               <i class="heart icon"></i> Lives
             </div>
@@ -35,123 +34,79 @@
               -1
             </a>
           </div>
-          <div class="ui labeled button">
-            <div class="ui label">
-              <i class="bullseye icon"></i> Kills
+          </div>
+          <div class="two column row">
+            <div class="ui labeled button">
+              <div class="ui label">
+                <i class="bullseye icon"></i> Kills
+              </div>
+              <a class="ui basic left pointing label" id="kills">
+                -1
+              </a>
             </div>
-            <a class="ui basic left pointing label" id="kills">
-              -1
-            </a>
           </div>
         </div>
         
         <div class="ui grid">
+          <div class="one column row">
+            <b>Purchase Towers</b>
+          </div>
+          <div class="one column row">
+            <div class="ui labeled button purchase-tower" id="0">
+              <a class="ui basic right pointing label" id="tower_0">
+                -1
+              </a>
+              <div class="ui label">
+                <i class="rocket icon"></i> Normal
+              </div>
+            </div>
+          </div>
+          <div class="one column row">
+            <div class="ui labeled button purchase-tower" id="1">
+              <a class="ui basic right pointing label" id="tower_0">
+                -1
+              </a>
+              <div class="ui label">
+                <i class="rocket icon"></i> Tower
+              </div>
+            </div>
+          </div>
+          <div class="one column row">
+            <div class="ui labeled button purchase-tower" id="1">
+              <a class="ui basic right pointing label" id="tower_1">
+                -1
+              </a>
+              <div class="ui label">
+                <i class="asterisk icon"></i> Ice
+              </div>
+            </div>
+          </div>
+          <div class="one column row">
+            <div class="ui labeled button purchase-tower" id="2">
+              <a class="ui basic right pointing label" id="tower_2">
+                -1
+              </a>
+              <div class="ui label">
+                <i class="certificate icon"></i> Freeze
+              </div>
+            </div>
+          </div>
           <div class="two column row">
-            <div class="column">
-              <div class="ui labeled button purchase-tower" id="0">
-                <a class="ui basic right pointing label" id="tower_0">
-                  -1
-                </a>
-                <div class="ui label">
-                  <i class="rocket icon"></i> Tower
-                </div>
+            <div class="ui labeled button purchase-tower" id="4">
+              <a class="ui basic right pointing label" id="tower_4">
+                -1
+              </a>
+              <div class="ui label">
+                <i class="lightning icon"></i> Lightning
               </div>
             </div>
-            <div class="column">
-              <div class="ui grey right floated inverted progress" data-value="0" data-total="100" id="progress_0">
-                <div class="bar">
-                  <div class="progress"></div>
-                </div>
+            <div class="ui grey right floated inverted progress" data-value="0" data-total="100" id="progress_0">
+              <div class="bar">
+                <div class="progress"></div>
               </div>
             </div>
-        </div>
-        
-        
-        <div class="ui segments">
-          <div class= "ui label"></div>
+          </div>
           
-          <div class="ui labeled button purchase-tower" id="1">
-            <a class="ui basic right pointing label" id="tower_0">
-              -1
-            </a>
-            <div class="ui label">
-              <i class="rocket icon"></i> Tower
-            </div>
-          </div>
-          <div class="ui tiny right floated button">Activate</div>
-          <div class="ui grey right floated inverted progress" data-value="0" data-total="100" id="progress_0">
-            <div class="bar">
-              <div class="progress"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ui segments">
-          <div class="ui labeled button purchase-tower" id="1">
-            <a class="ui basic right pointing label" id="tower_1">
-              -1
-            </a>
-            <div class="ui label">
-              <i class="asterisk icon"></i> Ice
-            </div>
-          </div>
-          <div class="ui tiny button">Activate</div>
-          <div class="ui grey inverted progress" data-value="0" data-total="100" id="progress_1">
-            <div class="bar">
-              <div class="progress"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ui segments">
-          <div class="ui labeled button purchase-tower" id="2">
-            <a class="ui basic right pointing label" id="tower_2">
-              -1
-            </a>
-            <div class="ui label">
-              <i class="certificate icon"></i> Freeze
-            </div>
-          </div>
-          <div class="ui tiny right floated button">Activate</div>
-          <div class="ui grey inverted progress" data-value="0" data-total="100" id="progress_2">
-            <div class="bar">
-              <div class="progress"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ui segments">
-          <div class="ui labeled button purchase-tower" id="3">
-            <a class="ui basic right pointing label" id="tower_3">
-              -1
-            </a>
-            <div class="ui label">
-              <i class="fire icon"></i> Fire
-            </div>
-          </div>
-          <div class="ui tiny right floated button">Activate</div>
-          <div class="ui red inverted progress" data-value="0" data-total="100" id="progress_3">
-            <div class="bar">
-              <div class="progress"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ui segments">
-          <div class="ui labeled button purchase-tower" id="4">
-            <a class="ui basic right pointing label" id="tower_4">
-              -1
-            </a>
-            <div class="ui label">
-              <i class="lightning icon"></i> Lightning
-            </div>
-          </div>
-          <div class="ui tiny right floated button">Activate</div> 
-          <div class="ui yellow inverted progress" data-value="0" data-total="100" id="progress_4">
-            <div class="bar">
-              <div class="progress"></div>
-              </div>
-            </div>
         </div>
 
       </div>
