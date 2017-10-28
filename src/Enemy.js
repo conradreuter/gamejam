@@ -4,10 +4,7 @@ import image from './enemy.png'
 
 export default class Enemy extends Entity {
 
-  static classPreload() {
-  }
-
-  preload() {
+  static preload() {
     $game.load.image('enemy', image)
   }
 

@@ -1,7 +1,9 @@
 import Entity from './Entity'
-import image from './portal.png'
 
 export default class Path extends Entity {
+
+  static preload() {
+  }
 
   constructor() {
     super()
@@ -18,12 +20,6 @@ export default class Path extends Entity {
     )
   }
 
-  preload() {
-    $game.load.image('portal', image)
-  }
-
   create() {
-    if (!this.isTurnPoint) return
-    this.sprite = $game.add.sprite(this.x, this.y, 'portal')
   }
 }

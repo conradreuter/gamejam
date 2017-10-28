@@ -3,11 +3,8 @@ import image from './wall.png'
 
 export default class Wall extends Entity {
 
-  static classPreload() {
+  static preload() {
     Wall.layer = $game.add.group()
-  }
-
-  preload() {
     $game.load.image('wall', image)
   }
 

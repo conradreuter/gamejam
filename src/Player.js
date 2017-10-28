@@ -4,13 +4,13 @@ import image from './player.png'
 
 export default class Player extends Entity {
 
+  static preload() {
+    $game.load.image('player', image)
+  }
+
   constructor() {
     super()
     this.speed = 180
-  }
-
-  preload() {
-    $game.load.image('player', image)
   }
 
   create() {

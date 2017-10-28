@@ -22,15 +22,11 @@ export default class State {
   }
 
   preload() {
-    Wall.classPreload()
-    Portal.classPreload()
-    Enemy.classPreload()
-
-    for (let entity of this.entities) {
-      if (entity.preload) {
-        entity.preload()
-      }
-    }
+    Path.preload()
+    Wall.preload()
+    Portal.preload()
+    Enemy.preload()
+    Player.preload()
   }
 
   create() {
