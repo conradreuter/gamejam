@@ -36,7 +36,7 @@ export default class Item extends Entity {
     const item = itemSprite.data
     if (item.isCollected) return
     const playerOrEnemy = playerOrEnemySprite.data
-    this.isCollected = item.type.applyEffect(playerOrEnemy)
+    item.isCollected = item.type.applyEffect(playerOrEnemy)
   }
 }
 
