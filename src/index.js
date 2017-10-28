@@ -7,8 +7,8 @@ import $ from 'jquery';
 import semantic from 'semantic-ui/dist/semantic.js';
 import 'semantic-ui/dist/semantic.css';
 
-import UI from './ui/button'
-window.ui = new UI;
+import GUI from './ui/GUI'
+window.GUI = new GUI;
 
 window.$constants = constants
 window.$gameState = new GameState()
