@@ -60,7 +60,7 @@ module.exports = {
   plugins: [
     new HtmlPlugin({
 		title: 'Gamejam!' ,
-		template: 'src/index.html'}),
+		template: 'src/ui/index.html'}),
     new webpack.ProvidePlugin({
       'PIXI': path.join(__dirname, '/node_modules/phaser/build/custom/pixi.js'),
       'Phaser': path.join(__dirname, '/node_modules/phaser/build/custom/phaser-split.js'),
