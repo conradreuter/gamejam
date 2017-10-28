@@ -8,7 +8,7 @@ import semantic from 'semantic-ui/dist/semantic.js';
 import 'semantic-ui/dist/semantic.css';
 
 import GUI from './ui/GUI'
-window.GUI = new GUI;
+window.$gui = new GUI;
 
 window.$constants = constants
 window.$gameState = new GameState()

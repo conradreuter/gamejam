@@ -35,7 +35,7 @@ export default class UI
   {
     this.setLives(0);
     this.setCoins(0);
-    this.setKills(0);
+    this.setKillCount(0);
     this.setTowerPrice(0, 0);
     this.setTowerPrice(1, 0);
     this.setTowerPrice(2, 0);
@@ -58,7 +58,21 @@ export default class UI
     $('#coins').text(value);
   }
   
-  setKills(value)
+  increaseKillCount()
+  {
+    let value = this.getKillCount();
+    value++;
+    this.setKillCount(value);
+  }
+  
+  getKillCount()
+  {
+    var value = $('#kills').text();
+    console.log("a", value);
+    return parseInt(value);
+  }
+  
+  setKillCount(value)
   {
     $('#kills').text(value);
   }

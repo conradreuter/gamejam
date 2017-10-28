@@ -43,12 +43,12 @@ export default class Wall extends Entity {
   }
 
   buildTower(type) {
-    console.log(type);
     if (this.tower) {
       this.tower.changeType(type)
     } else {
       this.tower = new Tower(type)
       $gameState.addEntity(this.tower)
+      this.tower.sprite.alignIn(this.sprite, Phaser.CENTER)
     }
   }
 }
