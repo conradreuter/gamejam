@@ -32,11 +32,11 @@ export default class Item extends Entity {
   }
 
   collideWithPlayerOrEnemy(itemSprite, playerOrEnemySprite) {
-    if (itemSprite.data.type.applyEffect(playerOrEnemySprite.data)) {
-      $gameState.removeEntity(itemSprite.data)
-    }
+    const item = itemSprite.data
+    const playerOrEnemy = playerOrEnemySprite.data
+    const hadEffect = item.type.applyEffect(playerOrEnemy)
+    if (hadEffect) $gameState.removeEntity(item)
   }
-
 }
 
 function chooseRandomType() {
