@@ -1,12 +1,10 @@
 import Entity from './Entity'
 import image from './portal.png'
 
-let layer
-
 export default class Portal extends Entity {
 
   static classPreload() {
-    layer = $game.add.group()
+    Portal.layer = $game.add.group()
   }
 
   preload() {
@@ -14,6 +12,6 @@ export default class Portal extends Entity {
   }
 
   create() {
-    this.sprite = layer.create(this.x, this.y, 'portal')
+    this.sprite = Portal.layer.create(this.x, this.y, 'portal')
   }
 }
