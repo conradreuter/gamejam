@@ -24,7 +24,7 @@ export default class Player extends Entity {
     this.startTime = $game.time.now
     this.sprite = $game.add.sprite(this.x, this.y, 'player')
     this.sprite.data = this
-    this.sprite.animations.add('walk', null, 2, true)
+    this.sprite.animations.add('walk', null, 8, true)
     this.sprite.animations.play('walk')
     $game.physics.arcade.enable(this.sprite)
   }
