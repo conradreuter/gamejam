@@ -8,6 +8,7 @@ import semantic from 'semantic-ui/dist/semantic.js';
 import 'semantic-ui/dist/semantic.css';
 
 import UI from './ui/button'
+window.ui = new UI;
 
 window.$constants = constants
 window.$gameState = new GameState()

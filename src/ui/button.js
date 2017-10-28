@@ -1,49 +1,73 @@
-window.ui = {}
 
-var UI = window.ui;
-UI.setLives = function(value)
+export default class UI 
 {
-  $('#lives').text(value);
+  constructor()
+  {
+    this._purchaseButtons = $('.purchase-tower');
+    this.resetValues();
+    this.deactivatePurchaseButton(1);
+  }
+  
+  resetValues()
+  {
+    this.setLives(0);
+    this.setCoins(0);
+    this.setKills(0);
+    this.setTowerPrice("tower_0", 0);
+    this.setTowerPrice("tower_1", 0);
+    this.setTowerPrice("tower_2", 0);
+    this.setTowerPrice("tower_3", 0);
+    this.setTowerPrice("tower_4", 0);
+    this.setTowerExperience("progress_0", 0);
+    this.setTowerExperience("progress_1", 0);
+    this.setTowerExperience("progress_2", 0);
+    this.setTowerExperience("progress_3", 0);
+    this.setTowerExperience("progress_4", 0);
+  }
+  
+  setLives(value)
+  {
+    $('#lives').text(value); 
+  }
+  
+  setCoins(value)
+  {
+    $('#coins').text(value);
+  }
+  
+  setKills(value)
+  {
+    $('#kills').text(value);
+  }
+  
+  setTowerPrice(towertype, value)
+  {
+    $('#'+towertype).text(value);
+  }
+  
+  setTowerExperience(towertype, value)
+  {
+    $('#'+towertype)
+      .progress({
+        value    : value,
+        total    : 100,
+        text     : {
+        active: '{value} of {total} done'
+      }
+    });
+  }
+  
+  activatePurchaseButton(index)
+  {
+    
+    this._purchaseButtons[index].attr("disabled", false);
+  }
+  
+  deactivatePurchaseButton(index)
+  {
+    console.log($(this._purchaseButtons[index]));
+    console.log($(this._purchaseButtons[index]).attr("disabled"));
+  }
+  
+  
 }
-UI.setCoins = function(value)
-{
-  $('#coins').text(value);
-}
-UI.setKills = function(value)
-{
-  $('#kills').text(value);
-}
-UI.setTowerPrice = function(towertype, value)
-{
-  $('#'+towertype).text(value);
-}
-UI.setTowerExperience = function(towertype, value)
-{
-  $('#'+towertype)
-    .progress({
-      value    : value,
-      total    : 100,
-      text     : {
-      active: '{value} of {total} done'
-    }
-  });
-}
-
-UI.reset = function()
-{
-  UI.setLives(0);
-  UI.setCoins(0);
-  UI.setKills(0);
-  UI.setTowerPrice("tower_0", 0);
-  UI.setTowerPrice("tower_1", 0);
-  UI.setTowerPrice("tower_2", 0);
-  UI.setTowerPrice("tower_3", 0);
-  UI.setTowerPrice("tower_4", 0);
-  UI.setTowerExperience("progress_0", 0);
-  UI.setTowerExperience("progress_1", 0);
-  UI.setTowerExperience("progress_2", 0);
-  UI.setTowerExperience("progress_3", 0);
-  UI.setTowerExperience("progress_4", 0);
-}
-
-UI.reset();
