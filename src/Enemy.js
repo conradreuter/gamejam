@@ -70,7 +70,7 @@ export default class Enemy extends Entity {
     }
     else this.burning = 0
 
-    if ($game.physics.arcade.intersects(this.sprite, $gameState.player.sprite)) {
+    if ($game.physics.arcade.distanceBetween(this.sprite, $gameState.player.sprite) < $constants.ENEMY_MAX_DISTANCE) {
       if ($gameState.player.super <= 0) $gameState.player.loseLife()
       $gameState.removeEntity(this)
       return
