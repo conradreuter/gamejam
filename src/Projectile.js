@@ -48,6 +48,7 @@ Projectile.Normal = {
 
 Projectile.Ice = {
   applyEffect(enemy) {
+    enemy.loseLives(1)
     enemy.slow()
   },
   frame: 1,
