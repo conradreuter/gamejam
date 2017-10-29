@@ -17,7 +17,7 @@ export default class Path extends Entity {
   }
 
   create() {
-    this.spawnDelay = Math.random()*3000 +3000
+    this.spawnDelay = Math.random()*3000 + 3000
 
     this.sprite = Path.layer.create(this.x, this.y, null)
     this.sprite.data = this
