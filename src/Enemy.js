@@ -45,7 +45,7 @@ export default class Enemy extends Entity {
   }
 
   update() {
-    this.sprite.alpha = .5 + .5 * (this.lives / $constants.ENEMY_LIVES)
+    this.sprite.alpha = .5 + .5 * Math.min(this.lives / $constants.ENEMY_LIVES, 1)
 
     if (this.accelerate > 0) {
       this.accelerate -= ($game.time.now - this.startTime)%2
