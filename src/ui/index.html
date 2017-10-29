@@ -4,18 +4,18 @@
     <link rel="stylesheet" type="text/css" href="src/ui/menu.css">
 <title>Game Jam</title>
 </head>
-<body>  
+<body>
 
     <div class="menu">
 
       <div class="ui inverted segment">
-        
+
         <div class="ui horizontal inverted segment">
         <div class="ui fluid tiny buttons">
           <button class="ui green left floated button">Start New Game</button>
         </div>
       </div>
-        
+
         <div class="ui grid">
           <div class="two column row">
             <div class="ui labeled button">
@@ -46,7 +46,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="ui grid">
           <div class="one column row">
             <b>Purchase Towers</b>
@@ -107,11 +107,32 @@
               </div>
             </div>
           </div>
-          
+
         </div>
 
       </div>
   </div>
-  
+  <style>
+    body {
+      background: #1b1c1d;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      padding: 24px;
+    }
+
+    .backpack.dropzone {
+      color: black;
+    }
+
+    div.menu {
+      padding-left: 32px;
+      width: 300px;
+    }
+
+    .purchase-tower {
+      width: 100px;
+    }
+  </style>
 </body>
 </html>
