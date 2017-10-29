@@ -19,7 +19,7 @@ export default class Player extends Entity {
     this.invise = 0
     this.super = 0
     $gui.setLives(this.lives)
-    $gui.setCoins(this.coins);
+    $gui.setCoins(this.coins)
   }
 
   create() {
