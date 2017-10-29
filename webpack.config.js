@@ -23,7 +23,7 @@ module.exports = {
 		]
       },
       {
-        test: /\.png$/,
+        test: /\.(png|wav|mp3|ogg)$/,
         use: 'url-loader',
       },
       {

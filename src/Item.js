@@ -50,8 +50,8 @@ function chooseRandomType() {
     ..._.times(2, () => Item.Ice),
     ..._.times(2, () => Item.Lightning),
     ..._.times(2, () => Item.Frozen),
-    ..._.times(1, () => Item.Speed),
-    ..._.times(1, () => Item.Invise),
+    ..._.times(2, () => Item.Speed),
+    ..._.times(2, () => Item.Invise),
     ..._.times(1, () => Item.Super)
   ]
   return _.sample(itemPool)
@@ -117,7 +117,7 @@ Item.Invise = {
     if (collector instanceof Enemy) return false
     collector.inviseItem()
   },
-  frame: 8,
+  frame: 7,
 }
 
 Item.Super = {
@@ -125,5 +125,5 @@ Item.Super = {
     if (collector instanceof Enemy) return false
     collector.superItem()
   },
-  frame: 9,
+  frame: 8,
 }

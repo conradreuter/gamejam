@@ -37,16 +37,16 @@ export default class Player extends Entity {
     const cursors = $game.input.keyboard.createCursorKeys()
     if (this.accelerate > 0) {
       this.accelerate -= ($game.time.now - this.startTime)%2
-      this.speed = $constants.PLAYER_SPEED*2
+      this.speed = $constants.PLAYER_SPEED*1.5
     } else {
       this.accelerate = 0
       this.speed = $constants.PLAYER_SPEED
     }
 
     if(this.invise > 0) this.invise -= ($game.time.now - this.startTime)%2
-
     if(this.super > 0) this.super -= ($game.time.now - this.startTime)%2
 
+    this.sprite.alpha = (this.invise > 0) ? .5 : 1
     this.sprite.body.velocity = {
       x: this.speed * (cursors.right.isDown - cursors.left.isDown),
       y: this.speed * (cursors.down.isDown - cursors.up.isDown),
@@ -76,7 +76,7 @@ export default class Player extends Entity {
   }
 
   speedItem() {
-    this.accelerate = $constants.BOOST_DURATION
+    this.accelerate = $constants.BOOST_DURATION*2
   }
 
   bombItem() {

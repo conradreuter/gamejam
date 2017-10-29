@@ -35,17 +35,19 @@ export default class Enemy extends Entity {
     this.slowDuration = 1
     this.freezeDuration = 0.5
     this.burnDuration = 0.2
+
+    $gui.increaseEnemyCount()
   }
 
   destroy() {
-    this.portal.enemyCount++
-    this.portal.currentEnemies--
+    --this.portal.currentEnemies
     this.sprite.destroy()
     $gui.increaseKillCount()
+    $gui.decreaseEnemyCount()
   }
 
   update() {
-    this.sprite.alpha = .5 + .5 * (this.lives / $constants.ENEMY_LIVES)
+    this.sprite.alpha = .5 + .5 * Math.min(this.lives / $constants.ENEMY_LIVES, 1)
 
     if (this.accelerate > 0) {
       this.accelerate -= ($game.time.now - this.startTime)%2
@@ -73,7 +75,7 @@ export default class Enemy extends Entity {
     }
     else this.burning = 0
 
-    if ($game.physics.arcade.distanceBetween(this.sprite, $gameState.player.sprite) < $constants.ENEMY_MAX_DISTANCE) {
+    if ($game.physics.arcade.intersects(this.sprite, $gameState.player.sprite)) {
       if ($gameState.player.super <= 0) $gameState.player.loseLife()
       $gameState.removeEntity(this)
       return
