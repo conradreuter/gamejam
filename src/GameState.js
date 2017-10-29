@@ -42,9 +42,6 @@ export default class State {
   create() {
     $game.physics.startSystem(Phaser.Physics.ARCADE)
     createInitialEntities(this)
-
-    // TODO remove
-    this.entities[0].buildTower(Tower.Normal)
   }
 
   update() {
