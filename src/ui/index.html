@@ -19,7 +19,7 @@
           <div class="two column row">
             <div class="ui labeled button">
             <div class="ui label">
-              <i class="heart icon"></i> Lives
+              <i class="red heart icon"></i> Lives
             </div>
             <a class="ui basic left pointing label" id="lives">
               -1
@@ -27,7 +27,7 @@
           </div>
           <div class="ui labeled button">
             <div class="ui label">
-              <i class="dollar icon"></i> Coins
+              <i class="yellow dollar icon"></i> Coins
             </div>
             <a class="ui basic left pointing label" id="coins">
               -1
@@ -37,7 +37,15 @@
           <div class="two column row">
             <div class="ui labeled button">
               <div class="ui label">
-                <i class="bullseye icon"></i> Kills
+                <i class="green spy icon"></i> Enemies
+              </div>
+              <a class="ui basic left pointing label" id="enemies">
+                -1
+              </a>
+            </div>
+            <div class="ui labeled button">
+              <div class="ui label">
+                <i class="blue bullseye icon"></i> Kills
               </div>
               <a class="ui basic left pointing label" id="kills">
                 -1
@@ -51,53 +59,53 @@
             <b>Purchase Towers</b>
           </div>
           <div class="one column row">
-            <div class="ui disabled labeled button purchase-tower" id="normal">
-              <a class="ui basic right pointing label">
-                -1
-              </a>
+            <div class="ui labeled button purchase-tower" id="normal">
               <div class="ui label">
                 <i class="rocket icon"></i> Normal
               </div>
+              <a class="ui basic left pointing label">
+                -1
+              </a>
             </div>
           </div>
           <div class="one column row">
-            <div class="ui disabled labeled button purchase-tower" id="ice">
-              <a class="ui basic right pointing label">
+            <div class="ui labeled button purchase-tower" id="ice">
+              <div class="ui label">
+                <i class="blue asterisk icon"></i> Ice
+              </div>
+              <a class="ui basic left pointing label">
                 -1
               </a>
-              <div class="ui label">
-                <i class="asterisk icon"></i> Ice
-              </div>
             </div>
           </div>
           <div class="one column row">
-            <div class="ui disabled labeled button purchase-tower" id="fire">
-              <a class="ui basic right pointing label">
+            <div class="ui labeled button purchase-tower" id="fire">
+              <div class="ui label">
+                <i class="red fire icon"></i> Fire
+              </div>
+              <a class="ui basic left pointing label">
                 -1
               </a>
-              <div class="ui label">
-                <i class="fire icon"></i> Fire
-              </div>
             </div>
           </div>
           <div class="two column row">
-            <div class="ui disabled labeled button purchase-tower" id="lightning">
-              <a class="ui basic right pointing label">
+            <div class="ui labeled button purchase-tower" id="lightning">
+              <div class="ui label">
+                <i class="yellow lightning icon"></i> Lightning
+              </div>
+              <a class="ui basic left pointing label">
                 -1
               </a>
-              <div class="ui label">
-                <i class="lightning icon"></i> Lightning
-              </div>
             </div>
           </div>
           <div class="one column row">
-            <div class="ui disabled labeled button purchase-tower" id="freeze">
-              <a class="ui basic right pointing label">
+            <div class="ui labeled button purchase-tower" id="freeze">
+              <div class="ui label">
+                <i class="grey certificate icon"></i> Freeze
+              </div>
+              <a class="ui basic left pointing label">
                 -1
               </a>
-              <div class="ui label">
-                <i class="certificate icon"></i> Freeze
-              </div>
             </div>
           </div>
 
@@ -123,8 +131,11 @@
       width: 300px;
     }
 
-    .purchase-tower {
+    .ui.label {
       width: 100px;
+    }
+    .ui.pointing.label {
+      width: 60px;
     }
   </style>
 </body>
