@@ -83,7 +83,7 @@ Tower.Fire = {
 Tower.Lightning = {
   cooldown: 500,
   costs: 15,
-  frame: 3,
+  frame: 4,
   projectileType: Projectile.Lightning,
   radius: 300,
 }
@@ -91,7 +91,7 @@ Tower.Lightning = {
 Tower.Freeze = {
   cooldown: 500,
   costs: 10,
-  frame: 4,
+  frame: 3,
   projectileType: Projectile.Freeze,
   radius: 300,
 }
