@@ -50,8 +50,8 @@ function chooseRandomType() {
     ..._.times(2, () => Item.Ice),
     ..._.times(2, () => Item.Lightning),
     ..._.times(2, () => Item.Frozen),
-    ..._.times(1, () => Item.Speed),
-    ..._.times(1, () => Item.Invise),
+    ..._.times(2, () => Item.Speed),
+    ..._.times(2, () => Item.Invise),
     ..._.times(1, () => Item.Super)
   ]
   return _.sample(itemPool)
