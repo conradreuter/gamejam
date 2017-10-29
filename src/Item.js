@@ -11,8 +11,9 @@ export default class Item extends Entity {
     $game.load.spritesheet('items', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
-  constructor() {
+  constructor(path) {
     super()
+    this.path = path
     this.type = chooseRandomType()
   }
 
@@ -23,12 +24,13 @@ export default class Item extends Entity {
   }
 
   destroy() {
+    this.path.spawnItemAfterDelay()
     this.sprite.destroy()
   }
 
   update() {
     $game.physics.arcade.overlap(this.sprite, Enemy.layer, this.collideWithPlayerOrEnemy)
-    $game.physics.arcade.overlap(this.sprite, $gameState.player, this.collideWithPlayerOrEnemy)
+    $game.physics.arcade.overlap(this.sprite, $gameState.player.sprite, this.collideWithPlayerOrEnemy)
     if (this.isCollected) $gameState.removeEntity(this)
   }
 
@@ -38,6 +40,7 @@ export default class Item extends Entity {
     const playerOrEnemy = playerOrEnemySprite.data
     item.isCollected = item.type.applyEffect(playerOrEnemy)
   }
+
 }
 
 function chooseRandomType() {
