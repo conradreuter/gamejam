@@ -44,7 +44,7 @@ export default class Item extends Entity {
 
 function chooseRandomType() {
   const itemPool = [
-    ..._.times(3, () => Item.Life),
+    ..._.times(1, () => Item.Life),
     ..._.times(10, () => Item.Coin),
     ..._.times(2, () => Item.Fire),
     ..._.times(2, () => Item.Ice),

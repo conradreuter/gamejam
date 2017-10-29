@@ -59,11 +59,12 @@ export default class Player extends Entity {
 
   loseLife() {
     --this.lives
+    if (this.lives <= 0) $game.state.start('gameover')
     $gui.setLives(this.lives)
   }
 
   gainLife() {
-    ++this.lives
+    this.lives += 5
     $gui.setLives(this.lives)
   }
 

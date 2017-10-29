@@ -1,4 +1,5 @@
 import constants from './constants'
+import GameOver from './GameOver'
 import GameState from './GameState'
 
 import jQuery from 'jquery';
@@ -11,11 +12,13 @@ import GUI from './ui/GUI'
 window.$gui = new GUI
 
 window.$constants = constants
-window.$gameState = new GameState()
 window.$game = new Phaser.Game({
   height: 12 * 64,
   parent: document.body,
   renderer: Phaser.WEBGL,
-  state: $gameState,
   width: 12 * 64,
 })
+
+$game.state.add('game', window.$gameState = new GameState())
+$game.state.add('gameover', GameOver)
+$game.state.start('game')
