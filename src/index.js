@@ -1,8 +1,8 @@
 import constants from './constants'
 import GameState from './GameState'
     
-import jQuery from 'jquery';
-import $ from 'jquery';
+/*import jQuery from 'jquery';
+import $ from 'jquery';*/
 
 import semantic from 'semantic-ui/dist/semantic.js';
 import 'semantic-ui/dist/semantic.css';
