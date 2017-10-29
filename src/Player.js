@@ -1,11 +1,11 @@
-import soundCollectLife from '../assets/audio/Cha_Ching_Register-Muska666-173262285.mp3'
-import soundCollectCoin from '../assets/audio/Cha_Ching_Register-Muska666-173262285.mp3'
-import soundCollectSpeed from '../assets/audio/Cha_Ching_Register-Muska666-173262285.mp3'
-import soundCollectBomb from '../assets/audio/Cha_Ching_Register-Muska666-173262285.mp3'
-import soundCollectInvisibility from '../assets/audio/Cha_Ching_Register-Muska666-173262285.mp3'
-import soundCollectSuperItem from '../assets/audio/Cha_Ching_Register-Muska666-173262285.mp3'
-import soundDie from '../assets/audio/Cha_Ching_Register-Muska666-173262285.mp3'
-import soundGetHurt from '../assets/audio/Cha_Ching_Register-Muska666-173262285.mp3'
+import soundCollectLife from '../assets/audio/collect_life.wav'
+import soundCollectCoin from '../assets/audio/collect_coin.wav'
+import soundCollectSpeed from '../assets/audio/collect_speed.wav'
+//import soundCollectBomb from ''
+import soundCollectInvisibility from '../assets/audio/collect_invisibility.wav'
+import soundCollectSuperItem from '../assets/audio/collect_super_item.mp3'
+//import soundDie from ''
+import soundGetHurt from '../assets/audio/player_hurt.mp3'
 import spritesheet from '../assets/player.png'
 import Entity from './Entity'
 import Path from './Path'
@@ -17,10 +17,10 @@ export default class Player extends Entity {
     $game.load.audio('collectLife', soundCollectLife)
     $game.load.audio('collectCoin', soundCollectCoin)
     $game.load.audio('collectSpeed', soundCollectSpeed)
-    $game.load.audio('collectBomb', soundCollectBomb)
+    //$game.load.audio('collectBomb', soundCollectBomb)
     $game.load.audio('collectInvisibility', soundCollectInvisibility)
     $game.load.audio('collectSuperItem', soundCollectSuperItem)
-    $game.load.audio('die', soundDie)//TODO not in use
+    //$game.load.audio('die', soundDie)//TODO not in use
     $game.load.audio('getHurt', soundGetHurt)
     $game.load.spritesheet('player', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
@@ -43,10 +43,10 @@ export default class Player extends Entity {
     this.soundCollectLife = $game.add.audio('collectLife');
     this.soundCollectCoin = $game.add.audio('collectCoin');
     this.soundCollectSpeed = $game.add.audio('collectSpeed');
-    this.soundCollectBomb = $game.add.audio('collectBomb');
+    //this.soundCollectBomb = $game.add.audio('collectBomb');
     this.soundCollectInvisibility = $game.add.audio('collectInvisibility');
     this.soundCollectSuperItem = $game.add.audio('collectSuperItem');
-    this.soundDie = $game.add.audio('die');
+    //this.soundDie = $game.add.audio('die');
     this.soundGetHurt = $game.add.audio('getHurt');
     this.sprite = $game.add.sprite(this.x, this.y, 'player')
     this.sprite.data = this
@@ -109,7 +109,7 @@ export default class Player extends Entity {
 
   bombItem() {
     this.bombs++
-    this.soundCollectBomb.play();
+    //this.soundCollectBomb.play();
   }
 
   inviseItem() {
