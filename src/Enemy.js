@@ -1,4 +1,7 @@
 import _ from 'lodash'
+//import soundCollectCoin from ''
+//import soundDie from ''
+//import soundGetHurt from ''
 import spritesheet from '../assets/enemies.png'
 import Entity from './Entity'
 import Path from './Path'
@@ -8,6 +11,9 @@ export default class Enemy extends Entity {
 
   static preload() {
     Enemy.layer = $game.add.group()
+    //$game.load.audio('collectCoin', soundCollectCoin)
+    //$game.load.audio('die', soundDie)
+    //$game.load.audio('getHurt', soundGetHurt)
     $game.load.spritesheet('enemy', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
@@ -27,6 +33,9 @@ export default class Enemy extends Entity {
 
   create() {
     this.startTime = $game.time.now
+    //this.soundCollectCoin = $game.add.audio('collectCoin');
+    //this.soundDie = $game.add.audio('die');
+    //this.soundGetHurt = $game.add.audio('getHurt');
     this.sprite = Enemy.layer.create(this.x, this.y, 'enemy')
     this.sprite.data = this
     this.sprite.animations.add('walk', this.type.frames, 2, true)
@@ -46,6 +55,7 @@ export default class Enemy extends Entity {
     this.sprite.destroy()
     $gui.increaseKillCount()
     $gui.decreaseEnemyCount()
+    //this.soundDie.play()
   }
 
   update() {
@@ -100,54 +110,67 @@ export default class Enemy extends Entity {
   loseLives(number) {
     this.lives -= number
     if (this.lives <= 0) $gameState.removeEntity(this)
+    //this.soundGetHurt.play()
   }
 
   gainLife() {
     ++this.lives
+    //this.soundCollectCoin.play()
   }
 
   fireItem() {
     this.burnDuration -= 0.01
+    //this.soundCollectCoin.play()
   }
 
   iceItem() {
     this.slowDuration -= 0.1
+    //this.soundCollectCoin.play()
   }
 
   lightningItem() {
     this.lives += 2
+    //this.soundCollectCoin.play()
   }
 
   frozenItem() {
     this.freezeDuration -= 0.01
+    //this.soundCollectCoin.play()
   }
 
   speedItem() {
     this.accelerate = $constants.BOOST_DURATION
+    //this.soundCollectCoin.play()
   }
 
   bombItem() {
     this.bombs++
+    //this.soundCollectCoin.play()
   }
 
   inviseItem() {
     this.invise = $constants.BOOST_DURATION
+    //this.soundCollectCoin.play()
   }
 
   superItem() {
     this.super = $constants.BOOST_DURATION
+    //this.soundCollectCoin.play()
   }
 
   slow() {
     this.accelerate = -$constants.BOOST_DURATION*this.slowDuration
+    //this.soundCollectCoin.play()
   }
 
   burn() {
     this.burning = $constants.BOOST_DURATION*this.burnDuration
+    //this.soundCollectCoin.play()
   }
 
   freeze() {
     this.freezed = $constants.BOOST_DURATION*this.freezeDuration
+    //this.soundCollectCoin.play()
   }
 }
 

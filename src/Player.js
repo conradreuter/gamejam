@@ -1,3 +1,11 @@
+import soundCollectLife from '../assets/audio/collect_life.wav'
+import soundCollectCoin from '../assets/audio/collect_coin.wav'
+import soundCollectSpeed from '../assets/audio/collect_speed.wav'
+//import soundCollectBomb from ''
+import soundCollectInvisibility from '../assets/audio/collect_invisibility.wav'
+import soundCollectSuperItem from '../assets/audio/collect_super_item.mp3'
+//import soundDie from ''
+import soundGetHurt from '../assets/audio/player_hurt.mp3'
 import spritesheet from '../assets/player.png'
 import Entity from './Entity'
 import Path from './Path'
@@ -6,6 +14,14 @@ import Wall from './Wall'
 export default class Player extends Entity {
 
   static preload() {
+    $game.load.audio('collectLife', soundCollectLife)
+    $game.load.audio('collectCoin', soundCollectCoin)
+    $game.load.audio('collectSpeed', soundCollectSpeed)
+    //$game.load.audio('collectBomb', soundCollectBomb)
+    $game.load.audio('collectInvisibility', soundCollectInvisibility)
+    $game.load.audio('collectSuperItem', soundCollectSuperItem)
+    //$game.load.audio('die', soundDie)//TODO not in use
+    $game.load.audio('getHurt', soundGetHurt)
     $game.load.spritesheet('player', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
@@ -24,6 +40,14 @@ export default class Player extends Entity {
 
   create() {
     this.startTime = $game.time.now
+    this.soundCollectLife = $game.add.audio('collectLife');
+    this.soundCollectCoin = $game.add.audio('collectCoin');
+    this.soundCollectSpeed = $game.add.audio('collectSpeed');
+    //this.soundCollectBomb = $game.add.audio('collectBomb');
+    this.soundCollectInvisibility = $game.add.audio('collectInvisibility');
+    this.soundCollectSuperItem = $game.add.audio('collectSuperItem');
+    //this.soundDie = $game.add.audio('die');
+    this.soundGetHurt = $game.add.audio('getHurt');
     this.sprite = $game.add.sprite(this.x, this.y, 'player')
     this.sprite.data = this
     this.sprite.animations.add('walk', null, 8, true)
@@ -61,16 +85,19 @@ export default class Player extends Entity {
     this.lives -= number
     if (this.lives <= 0) $game.state.start('gameover')
     $gui.setLives(this.lives)
+    this.soundGetHurt.play();
   }
 
   gainLife() {
     this.lives += 5
     $gui.setLives(this.lives)
+    this.soundCollectLife.play();
   }
 
   collectCoins(number) {
     this.coins += number
     $gui.setCoins(this.coins)
+    this.soundCollectCoin.play();
   }
 
   spendCoins(number) {
@@ -80,17 +107,21 @@ export default class Player extends Entity {
 
   speedItem() {
     this.accelerate = $constants.BOOST_DURATION*2
+    this.soundCollectSpeed.play();
   }
 
   bombItem() {
     this.bombs++
+    //this.soundCollectBomb.play();
   }
 
   inviseItem() {
     this.invise = $constants.BOOST_DURATION*2
+    this.soundCollectInvisibility.play();
   }
 
   superItem() {
     this.super = $constants.BOOST_DURATION
+    this.soundCollectSuperItem.play();
   }
 }
