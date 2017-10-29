@@ -19,6 +19,7 @@ export default class Player extends Entity {
     this.invise = 0
     this.super = 0
     $gui.setLives(this.lives)
+    $gui.setCoins(this.coins)
   }
 
   create() {
@@ -61,26 +62,17 @@ export default class Player extends Entity {
 
   gainLife() {
     ++this.lives
+    $gui.setLives(this.lives)
   }
 
-  collectCoin() {
-    ++this.coins
+  collectCoins(number) {
+    this.coins += number
+    $gui.setCoins(this.coins)
   }
 
-  fireItem() {
-    this.coins += 3
-  }
-
-  iceItem() {
-    this.coins += 3
-  }
-
-  lightningItem() {
-    this.coins += 3
-  }
-
-  frozenItem() {
-    this.coins += 3
+  spendCoins(number) {
+    this.coins -= number
+    $gui.setCoins(this.coins)
   }
 
   speedItem() {

@@ -5,7 +5,8 @@
     "Phaser": false,
     "$constants": false,
     "$game": false,
-    "$gameState": false
+    "$gameState": false,
+    "$gui": false
   },
   "parser": "babel-eslint",
   "plugins": ["async-await", "import"],

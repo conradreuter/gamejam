@@ -7,45 +7,72 @@ export default class UI
   {
     this._purchaseButtons = Array.from($('.purchase-tower'));
     this.resetValues();
-    //this.deactivatePurchaseButton(1);
-
+    
+    let self = this;
     this._purchaseButtons.forEach(function(button)
     {
       let id = button.id;
+      let costs = 0;
+      
       button.onclick = function()
       {
         if(Wall.selection)
         {
           switch(id)
           {
-            case "normal": {Wall.selection.buildTower(Tower.Normal); break}
-            case "ice": {Wall.selection.buildTower(Tower.Ice); break}
-            case "fire": {Wall.selection.buildTower(Tower.Fire); break}
-            case "lightning": {Wall.selection.buildTower(Tower.Lightning); break}
-            case "freeze": {Wall.selection.buildTower(Tower.Freeze); break}
+            case "normal": {
+              Wall.selection.buildTower(Tower.Normal);
+              costs = Tower.Normal.costs;
+              break
+            }
+            case "ice": {
+              Wall.selection.buildTower(Tower.Ice);
+              costs = Tower.Ice.costs;
+              break
+            }
+            case "fire": {
+              Wall.selection.buildTower(Tower.Fire);
+              costs = Tower.Fire.costs;
+              break
+            }
+            case "lightning": {
+              Wall.selection.buildTower(Tower.Lightning);
+              costs = Tower.Lightning.costs;
+              break
+            }
+            case "freeze": {
+              Wall.selection.buildTower(Tower.Freeze);
+              costs = Tower.Freeze.costs;
+              break
+            }
+            default: {
+              return;
+            }
           }
-          
+
+          $gameState.player.spendCoins(costs);
         }
       };
     });
     
   }
   
+  /**
+   * Note: Should be called after Tower, Player, etc. was initilized.
+   */
+  initFields()
+  {
+    this.setTowerPrice(0, Tower.Normal.costs);
+    this.setTowerPrice(1, Tower.Ice.costs);
+    this.setTowerPrice(2, Tower.Fire.costs);
+    this.setTowerPrice(3, Tower.Lightning.costs);
+    this.setTowerPrice(4, Tower.Freeze.costs);
+    this.updateButtonStates();
+  }
+  
   resetValues()
   {
-    this.setLives(0);
-    this.setCoins(0);
     this.setKillCount(0);
-    this.setTowerPrice(0, 0);
-    this.setTowerPrice(1, 0);
-    this.setTowerPrice(2, 0);
-    this.setTowerPrice(3, 0);
-    this.setTowerPrice(4, 0);
-    /*this.setTowerExperience("progress_0", 0);
-    this.setTowerExperience("progress_1", 0);
-    this.setTowerExperience("progress_2", 0);
-    this.setTowerExperience("progress_3", 0);
-    this.setTowerExperience("progress_4", 0);*/
   }
   
   setLives(value)
@@ -58,7 +85,7 @@ export default class UI
     let value = this.getCoins();
     value++;
     this.setCoins(value);
-    this.updatePurchaseButtons();
+    this.updateButtonStates();
   }
   
   getCoins()
@@ -70,7 +97,7 @@ export default class UI
   setCoins(value)
   {
     $('#coins').text(value);
-    this.updatePurchaseButtons();
+    this.updateButtonStates();
   }
   
   increaseKillCount()
@@ -106,69 +133,22 @@ export default class UI
     return parseInt(value) || Math.max;
   }
   
-  setTowerExperience(towertype, value)
+  updateButtonStates()
   {
-    $('#'+towertype)
-      .progress({
-        value    : value,
-        total    : 100,
-        text     : {
-        active: '{value} of {total} done'
-      }
-    });
-  }
-  
-  getTowerCosts(type)
-  {
-    if(type === Tower.Normal)
-    {
-      return this.getTowerPrice(0);
-    }
-    else if(type === Tower.Ice)
-    {
-      return this.getTowerPrice(1);
-    }
-    else if(type === Tower.Fire)
-    {
-      return this.getTowerPrice(2);
-    }
-    else if(type === Tower.Lightning)
-    {
-      return this.getTowerPrice(3);
-    }
-    else if(type === Tower.Freeze)
-    {
-      return this.getTowerPrice(4);
-    }
-    return this.getTowerPrice(-1);
-  }
-  
-  updatePurchaseButtons()
-  {
-    var coins = this.getCoins();
+    let coins = this.getCoins();
     for(let index = 0; index < this._purchaseButtons.length; ++index)
     {
       let button = this._purchaseButtons[index];
       let price = this.getTowerPrice(index);
+      
       if(coins < price)
       {
-        $(button).isEnabled = false;
+        $(button).addClass("disabled");
       }
       else
       {
-        $(button).isEnabled = true;
+        $(button).removeClass("disabled");
       }
     }
   }
-  
-  /*activatePurchaseButton(index)
-  {
-    this._purchaseButtons[index].attr("disabled", false);
-  }
-  
-  deactivatePurchaseButton(index)
-  {
-    console.log($(this._purchaseButtons[index]));
-    console.log($(this._purchaseButtons[index]).attr("disabled"));
-  }*/
 }
