@@ -1,6 +1,7 @@
 export default {
   ITEM_SPAWN_RATE: .2,
   ITEM_MAX_DISTANCE: 31,
+  ITEM_SPAWN_RATE: .05,
 
   PROJECTILE_SIZE: 20,
   TILE_SIZE: 64,
