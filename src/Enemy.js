@@ -39,6 +39,7 @@ export default class Enemy extends Entity {
   }
 
   destroy() {
+    --this.portal.currentEnemies
     this.sprite.destroy()
     $gui.increaseKillCount()
     $gui.decreaseEnemyCount()
