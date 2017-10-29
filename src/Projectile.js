@@ -67,7 +67,7 @@ Projectile.Freeze = {
   applyEffect(enemy) {
     enemy.freeze()
   },
-  frame: 3,
+  frame: 4,
   speed: 300,
 }
 
@@ -75,6 +75,6 @@ Projectile.Lightning = {
   applyEffect(enemy) {
     enemy.loseLives(4)
   },
-  frame: 4,
+  frame: 3,
   speed: 300,
 }
