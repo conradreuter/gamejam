@@ -42,12 +42,17 @@ export default class State {
   create() {
     $game.physics.startSystem(Phaser.Physics.ARCADE)
     createInitialEntities(this)
+    this.initGUI();
   }
 
   update() {
     for (let entity of this.entities) {
       if (entity.update) entity.update()
     }
+  }
+  
+  initGUI(){
+    $gui.initFields();
   }
 }
 
