@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="src/ui/menu.css">
+<title>Game Jam</title>
+</head>
+<body>  
+
+    <div class="menu">
+
+      <div class="ui inverted segment">
+        
+        <div class="ui horizontal inverted segment">
+        <div class="ui fluid tiny buttons">
+          <button class="ui green left floated button">Start New Game</button>
+        </div>
+      </div>
+        
+        <div class="ui grid">
+          <div class="two column row">
+            <div class="ui labeled button">
+            <div class="ui label">
+              <i class="heart icon"></i> Lives
+            </div>
+            <a class="ui basic left pointing label" id="lives">
+              -1
+            </a>
+          </div>
+          <div class="ui labeled button">
+            <div class="ui label">
+              <i class="dollar icon"></i> Coins
+            </div>
+            <a class="ui basic left pointing label" id="coins">
+              -1
+            </a>
+          </div>
+          </div>
+          <div class="two column row">
+            <div class="ui labeled button">
+              <div class="ui label">
+                <i class="bullseye icon"></i> Kills
+              </div>
+              <a class="ui basic left pointing label" id="kills">
+                -1
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="ui grid">
+          <div class="one column row">
+            <b>Purchase Towers</b>
+          </div>
+          <div class="one column row">
+            <div class="ui labeled button purchase-tower" id="normal">
+              <a class="ui basic right pointing label">
+                -1
+              </a>
+              <div class="ui label">
+                <i class="rocket icon"></i> Normal
+              </div>
+            </div>
+          </div>
+          <div class="one column row">
+            <div class="ui labeled button purchase-tower" id="ice">
+              <a class="ui basic right pointing label">
+                -1
+              </a>
+              <div class="ui label">
+                <i class="asterisk icon"></i> Ice
+              </div>
+            </div>
+          </div>
+          <div class="one column row">
+            <div class="ui labeled button purchase-tower" id="fire">
+              <a class="ui basic right pointing label">
+                -1
+              </a>
+              <div class="ui label">
+                <i class="fire icon"></i> Fire
+              </div>
+            </div>
+          </div>
+          <div class="two column row">
+            <div class="ui labeled button purchase-tower" id="lightning">
+              <a class="ui basic right pointing label">
+                -1
+              </a>
+              <div class="ui label">
+                <i class="lightning icon"></i> Lightning
+                <!--<img src="../../assets/items.png">-->
+              </div>
+            </div>
+            <div class="ui grey right floated inverted progress" data-value="0" data-total="100" id="progress_0">
+              <div class="bar">
+                <div class="progress"></div>
+              </div>
+            </div>
+          </div>
+          <div class="one column row">
+            <div class="ui labeled button purchase-tower" id="freeze">
+              <a class="ui basic right pointing label">
+                -1
+              </a>
+              <div class="ui label">
+                <i class="certificate icon"></i> Freeze
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+  </div>
+  
+</body>
+</html>

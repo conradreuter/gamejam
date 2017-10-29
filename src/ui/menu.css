@@ -1,0 +1,20 @@
+html {
+  background-color: black;
+}
+.backpack.dropzone {
+  color: black;
+}
+
+canvas, div.menu {
+  float: right;
+}
+
+div.menu {
+  width: 300px;
+  /*overflow: hidden;*/
+}
+
+.purchase-tower
+{
+  width:100px;
+}

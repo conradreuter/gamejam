@@ -38,6 +38,7 @@ export default class Enemy extends Entity {
 
   destroy() {
     this.sprite.destroy()
+    $gui.increaseKillCount();
   }
 
   update() {

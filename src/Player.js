@@ -18,6 +18,7 @@ export default class Player extends Entity {
     this.accelerate = 0
     this.invise = 0
     this.super = 0
+    $gui.setLives(this.lives)
   }
 
   create() {
@@ -55,6 +56,7 @@ export default class Player extends Entity {
 
   loseLife() {
     --this.lives
+    $gui.setLives(this.lives)
   }
 
   gainLife() {
