@@ -34,18 +34,16 @@ export default class Player extends Entity {
     $game.physics.arcade.overlap(this.sprite, Path.layer, this.collide)
     const cursors = $game.input.keyboard.createCursorKeys()
     if (this.accelerate > 0) {
-      this.accelerate -= this.startTime - $game.time.now
+      this.accelerate -= ($game.time.now - this.startTime)%2
       this.speed = $constants.PLAYER_SPEED*2
     } else {
       this.accelerate = 0
       this.speed = $constants.PLAYER_SPEED
     }
 
-    if(this.invise > 0) this.invise -= this.startTime - $game.time.now
-    else this.invise = 0
+    if(this.invise > 0) this.invise -= ($game.time.now - this.startTime)%2
 
-    if(this.super > 0) this.super -= this.startTime - $game.time.now
-    else this.super = 0
+    if(this.super > 0) this.super -= ($game.time.now - this.startTime)%2
 
     this.sprite.body.velocity = {
       x: this.speed * (cursors.right.isDown - cursors.left.isDown),
@@ -84,7 +82,7 @@ export default class Player extends Entity {
   }
 
   speedItem() {
-    this.accelerate = 5
+    this.accelerate = $constants.BOOST_DURATION
   }
 
   bombItem() {
@@ -92,10 +90,10 @@ export default class Player extends Entity {
   }
 
   inviseItem() {
-    this.invise = 5
+    this.invise = $constants.BOOST_DURATION
   }
 
   superItem() {
-    this.super = 5
+    this.super = $constants.BOOST_DURATION
   }
 }

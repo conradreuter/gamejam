@@ -48,6 +48,7 @@ Projectile.Normal = {
 
 Projectile.Ice = {
   applyEffect(enemy) {
+    enemy.slow()
   },
   frame: 1,
   speed: 300,
@@ -55,6 +56,7 @@ Projectile.Ice = {
 
 Projectile.Fire = {
   applyEffect(enemy) {
+    enemy.burn()
   },
   frame: 2,
   speed: 300,
@@ -62,6 +64,7 @@ Projectile.Fire = {
 
 Projectile.Freeze = {
   applyEffect(enemy) {
+    enemy.freeze()
   },
   frame: 3,
   speed: 300,
@@ -69,6 +72,7 @@ Projectile.Freeze = {
 
 Projectile.Lightning = {
   applyEffect(enemy) {
+    enemy.loseLives(4)
   },
   frame: 4,
   speed: 300,

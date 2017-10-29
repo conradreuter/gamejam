@@ -10,4 +10,6 @@ export default {
 
   PLAYER_LIVES: 5,
   PLAYER_SPEED: 320,
+
+  BOOST_DURATION: 50,
 }
