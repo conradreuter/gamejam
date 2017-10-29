@@ -40,6 +40,8 @@ export default class Portal extends Entity {
       $gameState.addEntity(enemy)
       enemy.sprite.x = this.sprite.x
       enemy.sprite.y = this.sprite.y
+      enemy.lives += this.enemyCount
+      console.log(enemy.lives)
       this.currentEnemies++
     }
     this.spawnTimer.add(this.spawnDelay, this.spawnEnemy, this)
