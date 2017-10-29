@@ -103,7 +103,7 @@ export default class UI
     let button = this._purchaseButtons[index];
     let label = $(button).find('a');
     let value = label.text();
-    return parseInt(value);
+    return parseInt(value) || Math.max;
   }
   
   setTowerExperience(towertype, value)
@@ -140,13 +140,13 @@ export default class UI
     {
       return this.getTowerPrice(4);
     }
-    return Math.max;
+    return this.getTowerPrice(-1);
   }
   
   updatePurchaseButtons()
   {
     var coins = this.getCoins();
-    for(let index = 0; this._purchaseButtons.length; ++index)
+    for(let index = 0; index < this._purchaseButtons.length; ++index)
     {
       let button = this._purchaseButtons[index];
       let price = this.getTowerPrice(index);
