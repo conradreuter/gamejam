@@ -7,7 +7,7 @@ export default class UI
   {
     this._purchaseButtons = Array.from($('.purchase-tower'));
     this.resetValues();
-
+    
     let self = this;
     this._purchaseButtons.forEach(function(button)
     {
@@ -57,17 +57,22 @@ export default class UI
     
   }
   
+  /**
+   * Note: Should be called after Tower, Player, etc. was initilized.
+   */
+  initFields()
+  {
+    this.setTowerPrice(0, Tower.Normal.costs);
+    this.setTowerPrice(1, Tower.Ice.costs);
+    this.setTowerPrice(2, Tower.Fire.costs);
+    this.setTowerPrice(3, Tower.Lightning.costs);
+    this.setTowerPrice(4, Tower.Freeze.costs);
+    this.updateButtonStates();
+  }
+  
   resetValues()
   {
-    this.setLives(0);
-    
     this.setKillCount(0);
-    this.setTowerPrice(0, 1);
-    this.setTowerPrice(1, 5);
-    this.setTowerPrice(2, 10);
-    this.setTowerPrice(3, 15);
-    this.setTowerPrice(4, 20);
-    this.setCoins(10);
   }
   
   setLives(value)
@@ -80,7 +85,7 @@ export default class UI
     let value = this.getCoins();
     value++;
     this.setCoins(value);
-    this.updatePurchaseButtons();
+    this.updateButtonStates();
   }
   
   getCoins()
@@ -92,7 +97,7 @@ export default class UI
   setCoins(value)
   {
     $('#coins').text(value);
-    this.updatePurchaseButtons();
+    this.updateButtonStates();
   }
   
   increaseKillCount()
@@ -128,7 +133,7 @@ export default class UI
     return parseInt(value) || Math.max;
   }
   
-  updatePurchaseButtons()
+  updateButtonStates()
   {
     let coins = this.getCoins();
     for(let index = 0; index < this._purchaseButtons.length; ++index)
