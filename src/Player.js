@@ -57,8 +57,8 @@ export default class Player extends Entity {
     this.startTime = $game.time.now
   }
 
-  loseLife() {
-    --this.lives
+  loseLives(number) {
+    this.lives -= number
     if (this.lives <= 0) $game.state.start('gameover')
     $gui.setLives(this.lives)
   }

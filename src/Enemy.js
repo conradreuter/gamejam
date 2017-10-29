@@ -80,7 +80,7 @@ export default class Enemy extends Entity {
     if ($game.physics.arcade.intersects(this.sprite, $gameState.player.sprite)) {
       if ($game.physics.arcade.distanceBetween(this.sprite, $gameState.player.sprite) > $constants.ENEMY_MAX_DISTANCE) return
 
-      if ($gameState.player.super <= 0) $gameState.player.loseLife(this.type.damage)
+      if ($gameState.player.super <= 0) $gameState.player.loseLives(this.type.damage)
       $gameState.removeEntity(this)
       return
     }
@@ -169,27 +169,27 @@ Enemy.Normal = {
 }
 
 Enemy.Ice = {
-  damage: 2,
+  damage: 3,
   frames: [4, 5, 6, 7],
   slowDuration: 0,
   freezeDuration: 0.25,
 }
 
 Enemy.Fire = {
-  damage: 2,
+  damage: 3,
   frames: [8, 9, 10, 11],
   slowDuration: 2,
 }
 
 Enemy.Lightning = {
-  damage: 2,
+  damage: 3,
   frames: [12, 13, 14, 15],
   freezeDuration: 0.7,
   lives: 20,
 }
 
 Enemy.Freeze = {
-  damage: 2,
+  damage: 3,
   frames: [16, 17, 18, 19],
   slowDuration: 0.5,
   freezeDuration: 0,
