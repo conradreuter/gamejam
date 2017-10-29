@@ -13,7 +13,7 @@ export default class Player extends Entity {
     super()
     this.lives = $constants.PLAYER_LIVES
     this.speed = $constants.PLAYER_SPEED
-    this.coins = 0
+    this.coins = 10
     this.bombs = 0
     this.accelerate = 0
     this.invise = 0
