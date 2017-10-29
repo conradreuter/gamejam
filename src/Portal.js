@@ -14,6 +14,8 @@ export default class Portal extends Entity {
     super()
     _.bindAll(this, 'spawnEnemy')
     this.spawnDelay = 3000
+    this.enemyCount = 3
+    this.currentEnemies = 0
   }
 
   create() {
@@ -29,14 +31,17 @@ export default class Portal extends Entity {
   }
 
   decreaseSpawnDelay() {
-    this.spawnDelay *= .9
+    this.spawnDelay *= 0.92
   }
 
   spawnEnemy() {
-    const enemy = new Enemy
+    if (this.currentEnemies < this.enemyCount) {
+    const enemy = new Enemy(this)
     $gameState.addEntity(enemy)
     enemy.sprite.x = this.sprite.x
     enemy.sprite.y = this.sprite.y
+    this.currentEnemies++
+    }
     this.spawnTimer.add(this.spawnDelay, this.spawnEnemy, this)
   }
 }
