@@ -44,9 +44,9 @@ export default class Player extends Entity {
     }
 
     if(this.invise > 0) this.invise -= ($game.time.now - this.startTime)%2
-
     if(this.super > 0) this.super -= ($game.time.now - this.startTime)%2
 
+    this.sprite.alpha = (this.invise > 0) ? .5 : 1
     this.sprite.body.velocity = {
       x: this.speed * (cursors.right.isDown - cursors.left.isDown),
       y: this.speed * (cursors.down.isDown - cursors.up.isDown),
