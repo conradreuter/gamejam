@@ -1,5 +1,6 @@
 export default {
   ITEM_SPAWN_RATE: .2,
+  ITEM_MAX_DISTANCE: 31,
 
   PROJECTILE_SIZE: 20,
   TILE_SIZE: 64,
@@ -10,4 +11,6 @@ export default {
 
   PLAYER_LIVES: 5,
   PLAYER_SPEED: 320,
+
+  BOOST_DURATION: 50,
 }

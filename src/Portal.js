@@ -13,15 +13,23 @@ export default class Portal extends Entity {
   constructor() {
     super()
     _.bindAll(this, 'spawnEnemy')
+    this.spawnDelay = 3000
   }
 
   create() {
     this.sprite = Portal.layer.create(this.x, this.y, 'portal')
     this.sprite.animations.add('spawn', null, 8, true)
     this.sprite.animations.play('spawn')
-    this.timer = $game.time.create()
-    this.timer.loop(2000, this.spawnEnemy, this)
-    this.timer.start()
+    this.spawnDelayTimer = $game.time.create(false)
+    this.spawnDelayTimer.loop(10000, this.decreaseSpawnDelay, this)
+    this.spawnDelayTimer.start()
+    this.spawnTimer = $game.time.create(false)
+    this.spawnTimer.add(this.spawnDelay, this.spawnEnemy, this)
+    this.spawnTimer.start()
+  }
+
+  decreaseSpawnDelay() {
+    this.spawnDelay *= .9
   }
 
   spawnEnemy() {
@@ -29,5 +37,6 @@ export default class Portal extends Entity {
     $gameState.addEntity(enemy)
     enemy.sprite.x = this.sprite.x
     enemy.sprite.y = this.sprite.y
+    this.spawnTimer.add(this.spawnDelay, this.spawnEnemy, this)
   }
 }
