@@ -10,8 +10,9 @@ export default class Enemy extends Entity {
     $game.load.spritesheet('enemy', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
-  constructor() {
+  constructor(portal) {
     super()
+    this.portal = portal
     this.type = chooseRandomType()
     this.bombs = 0
     this.lives = $constants.ENEMY_LIVES
