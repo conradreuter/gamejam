@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import spritesheet from '../assets/enemies.png'
 import Entity from './Entity'
+import Path from './Path'
 import Wall from './Wall'
 
 export default class Enemy extends Entity {
@@ -31,6 +32,7 @@ export default class Enemy extends Entity {
     this.sprite.animations.add('walk', this.type.frames, 2, true)
     this.sprite.animations.play('walk')
     $game.physics.arcade.enable(this.sprite)
+    this.sprite.body.setCircle(this.sprite.width / 2)
 
     this.slowDuration = 1
     this.freezeDuration = 0.5
@@ -82,8 +84,17 @@ export default class Enemy extends Entity {
       $gameState.removeEntity(this)
       return
     }
+
     $game.physics.arcade.collide(this.sprite, Wall.layer)
-    if ($gameState.player.invise <= 0) $game.physics.arcade.moveToObject(this.sprite, $gameState.player.sprite, this.speed)
+
+    this.moveTowardsPlayer()
+  }
+
+  moveTowardsPlayer() {
+    if ($gameState.player.invise > 0) return
+    const path = Path.forSprite(this.sprite).findNextPathTowardsPlayer()
+    const target = path ? path.sprite : $gameState.player.sprite
+    $game.physics.arcade.moveToObject(this.sprite, target, this.speed)
   }
 
   loseLives(number) {

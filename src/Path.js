@@ -7,8 +7,23 @@ export default class Path extends Entity {
     Path.layer = $game.add.group()
   }
 
+  static forSprite(sprite) {
+    const x = sprite.x + sprite.width / 2
+    const y = sprite.y + sprite.height / 2
+    let path = null
+    $game.physics.arcade.getObjectsAtLocation(x, y, Path.layer, (arg, pathSprite) => path = pathSprite.data)
+    return path
+  }
+
+  static resetPlayerDistances() {
+    for (let pathSprite of Path.layer.children) {
+      pathSprite.data.playerDistance = +Infinity
+    }
+  }
+
   constructor(spawnsItems) {
     super()
+    this.playerDistance = +Infinity
     this.spawnsItems = spawnsItems
     this.left = null
     this.right = null
@@ -16,9 +31,19 @@ export default class Path extends Entity {
     this.down = null
   }
 
-  create() {
-    this.spawnDelay = Math.random()*3000 + 3000
+  get neighbours() {
+    if (!this.__neighboursCache) {
+      this.__neighboursCache = []
+      if (this.left) this.__neighboursCache.push(this.left)
+      if (this.right) this.__neighboursCache.push(this.right)
+      if (this.up) this.__neighboursCache.push(this.up)
+      if (this.down) this.__neighboursCache.push(this.down)
+    }
+    return this.__neighboursCache
+  }
 
+  create() {
+    this.spawnDelay = Math.random() * 3000 + 3000
     this.sprite = Path.layer.create(this.x, this.y, null)
     this.sprite.data = this
     this.sprite.width = $constants.TILE_SIZE
@@ -44,5 +69,26 @@ export default class Path extends Entity {
     const item = new Item(this)
     $gameState.addEntity(item)
     item.sprite.alignIn(this.sprite, Phaser.CENTER)
+  }
+
+  setPlayerDistance(distance) {
+    if (this.playerDistance <= distance) return
+    this.playerDistance = distance
+    for (let neighbour of this.neighbours) {
+      neighbour.setPlayerDistance(distance + 1)
+    }
+  }
+
+  findNextPathTowardsPlayer() {
+    if (this.playerDistance < 1) return null
+    let minPath = null
+    let minDistance = this.playerDistance
+    for (let neighbour of this.neighbours) {
+      if (neighbour.playerDistance < minDistance) {
+        minPath = neighbour
+        minDistance = neighbour.playerDistance
+      }
+    }
+    return minPath
   }
 }
