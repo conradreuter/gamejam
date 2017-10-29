@@ -11,8 +11,9 @@ export default class Item extends Entity {
     $game.load.spritesheet('items', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
-  constructor() {
+  constructor(path) {
     super()
+    this.path = path
     this.type = chooseRandomType()
   }
 
@@ -23,6 +24,7 @@ export default class Item extends Entity {
   }
 
   destroy() {
+    this.path.spawnItemAfterDelay()
     this.sprite.destroy()
   }
 
@@ -39,6 +41,7 @@ export default class Item extends Entity {
     const playerOrEnemy = playerOrEnemySprite.data
     item.isCollected = item.type.applyEffect(playerOrEnemy)
   }
+
 }
 
 function chooseRandomType() {
