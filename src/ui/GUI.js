@@ -73,6 +73,7 @@ export default class UI
   resetValues()
   {
     this.setKillCount(0);
+    this.setEnemyCount(0);
   }
   
   setLives(value)
@@ -116,6 +117,31 @@ export default class UI
   setKillCount(value)
   {
     $('#kills').text(value);
+  }
+  
+  increaseEnemyCount()
+  {
+    let value = this.getEnemyCount();
+    value++;
+    this.setEnemyCount(value);
+  }
+  
+  decreaseEnemyCount()
+  {
+    let value = this.getEnemyCount();
+    value--;
+    this.setEnemyCount(value);
+  }
+  
+  getEnemyCount()
+  {
+    let value = $('#enemies').text();
+    return parseInt(value);
+  }
+  
+  setEnemyCount(value)
+  {
+    $('#enemies').text(value);
   }
   
   setTowerPrice(index, value)

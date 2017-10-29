@@ -117,7 +117,7 @@ Item.Invise = {
     if (collector instanceof Enemy) return false
     collector.inviseItem()
   },
-  frame: 8,
+  frame: 7,
 }
 
 Item.Super = {
@@ -125,5 +125,5 @@ Item.Super = {
     if (collector instanceof Enemy) return false
     collector.superItem()
   },
-  frame: 9,
+  frame: 8,
 }

@@ -10,9 +10,8 @@ export default class Enemy extends Entity {
     $game.load.spritesheet('enemy', spritesheet, $constants.TILE_SIZE, $constants.TILE_SIZE)
   }
 
-  constructor(portal) {
+  constructor() {
     super()
-    this.portal = portal
     this.type = chooseRandomType()
     this.bombs = 0
     this.lives = $constants.ENEMY_LIVES
@@ -35,13 +34,14 @@ export default class Enemy extends Entity {
     this.slowDuration = 1
     this.freezeDuration = 0.5
     this.burnDuration = 0.2
+
+    $gui.increaseEnemyCount()
   }
 
   destroy() {
-    this.portal.enemyCount++
-    this.portal.currentEnemies--
     this.sprite.destroy()
     $gui.increaseKillCount()
+    $gui.decreaseEnemyCount()
   }
 
   update() {
@@ -67,20 +67,19 @@ export default class Enemy extends Entity {
     if(this.super > 0) this.super -= ($game.time.now - this.startTime)%2
     else this.super = 0
 
-    
-    if ($game.physics.arcade.distanceBetween(this.sprite, $gameState.player.sprite) < $constants.ENEMY_MAX_DISTANCE) {
+    if(this.burning > 0) {
+      this.lives -= 0.2
+      this.burning -= ($game.time.now - this.startTime)%2
+    }
+    else this.burning = 0
+
+    if ($game.physics.arcade.intersects(this.sprite, $gameState.player.sprite)) {
       if ($gameState.player.super <= 0) $gameState.player.loseLife()
       $gameState.removeEntity(this)
       return
     }
     $game.physics.arcade.collide(this.sprite, Wall.layer)
     if ($gameState.player.invise <= 0) $game.physics.arcade.moveToObject(this.sprite, $gameState.player.sprite, this.speed)
-    
-    if(this.burning > 0) {
-      this.loseLives(0.5)
-      this.burning -= ($game.time.now - this.startTime)%2
-    }
-    else this.burning = 0
   }
 
   loseLives(number) {
