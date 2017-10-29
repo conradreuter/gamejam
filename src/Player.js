@@ -84,7 +84,7 @@ export default class Player extends Entity {
   }
 
   inviseItem() {
-    this.invise = $constants.BOOST_DURATION
+    this.invise = $constants.BOOST_DURATION*2
   }
 
   superItem() {
