@@ -32,11 +32,11 @@ export default class Tower extends Entity {
     this.timer.stop()
     this.timer.loop(this.type.cooldown, this.shoot, this)
     this.timer.start()
-    
+
     this.soundConstruction = $game.add.audio('construction')
     this.soundShoot = $game.add.audio('shoot')
     this.soundUpgrade = $game.add.audio('upgrade')
-    
+
     this.soundUpgrade.play()
   }
 
@@ -50,8 +50,8 @@ export default class Tower extends Entity {
     const projectile = new Projectile(enemy, this.type.projectileType)
     $gameState.addEntity(projectile)
     projectile.sprite.alignIn(this.sprite, Phaser.CENTER)
-    
-    this.soundShoot.play()
+
+    this.soundShoot.play('', 0, .2)
   }
 
   chooseTarget() {
