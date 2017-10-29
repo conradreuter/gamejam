@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import Audio from './Audio'
 import Enemy from './Enemy'
 import Item from './Item'
 import Path from './Path'
@@ -38,14 +37,12 @@ export default class State {
     Enemy.preload()
     Player.preload()
     Projectile.preload()
-    Audio.preload()
   }
 
   create() {
     $game.physics.startSystem(Phaser.Physics.ARCADE)
     createInitialEntities(this)
-    this.initGUI();
-    this.audio = new Audio();
+    this.initGUI()
   }
 
   update() {
