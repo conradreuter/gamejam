@@ -19,7 +19,6 @@ export default class Player extends Entity {
     this.invise = 0
     this.super = 0
     $gui.setLives(this.lives)
-    $gui.onPurchaseTower = this.spendCoins;
   }
 
   create() {
@@ -73,6 +72,7 @@ export default class Player extends Entity {
   spendCoins(value)
   {
     //TODO Lars, sync with GUI
+    console.log("spend", value);
     this.coins -= value
   }
 

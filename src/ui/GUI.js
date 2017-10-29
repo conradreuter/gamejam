@@ -8,7 +8,7 @@ export default class UI
     this._purchaseButtons = Array.from($('.purchase-tower'));
     this.resetValues();
 
-    var self = this;
+    let self = this;
     this._purchaseButtons.forEach(function(button)
     {
       let id = button.id;
@@ -22,36 +22,35 @@ export default class UI
           {
             case "normal": {
               Wall.selection.buildTower(Tower.Normal);
-              costs = self.getTowerCosts(0);
+              costs = Tower.Normal.costs;
               break
             }
             case "ice": {
               Wall.selection.buildTower(Tower.Ice);
-              costs = self.getTowerCosts(1);
+              costs = Tower.Ice.costs;
               break
             }
             case "fire": {
               Wall.selection.buildTower(Tower.Fire);
-              costs = self.getTowerCosts(2);
+              costs = Tower.Fire.costs;
               break
             }
             case "lightning": {
               Wall.selection.buildTower(Tower.Lightning);
-              costs = self.getTowerCosts(3);
+              costs = Tower.Lightning.costs;
               break
             }
             case "freeze": {
               Wall.selection.buildTower(Tower.Freeze);
-              costs = self.getTowerCosts(4);
+              costs = Tower.Freeze.costs;
               break
             }
             default: {
               return;
             }
           }
-          
-          $gui.onPurchaseTower(costs);
-          
+
+          $gameState.player.spendCoins(costs);
         }
       };
     });
@@ -129,51 +128,13 @@ export default class UI
     return parseInt(value) || Math.max;
   }
   
-  /*setTowerExperience(towertype, value)
-  {
-    $('#'+towertype)
-      .progress({
-        value    : value,
-        total    : 100,
-        text     : {
-        active: '{value} of {total} done'
-      }
-    });
-  }*/
-  
-  getTowerCosts(type)
-  {
-    if(type === Tower.Normal)
-    {
-      return this.getTowerPrice(0);
-    }
-    else if(type === Tower.Ice)
-    {
-      return this.getTowerPrice(1);
-    }
-    else if(type === Tower.Fire)
-    {
-      return this.getTowerPrice(2);
-    }
-    else if(type === Tower.Lightning)
-    {
-      return this.getTowerPrice(3);
-    }
-    else if(type === Tower.Freeze)
-    {
-      return this.getTowerPrice(4);
-    }
-    return this.getTowerPrice(-1);
-  }
-  
   updatePurchaseButtons()
   {
-    var coins = this.getCoins();
+    let coins = this.getCoins();
     for(let index = 0; index < this._purchaseButtons.length; ++index)
     {
       let button = this._purchaseButtons[index];
       let price = this.getTowerPrice(index);
-      console.log(index, $(button).isEnabled);
       
       if(coins < price)
       {
@@ -185,15 +146,4 @@ export default class UI
       }
     }
   }
-  
-  /*activatePurchaseButton(index)
-  {
-    this._purchaseButtons[index].attr("disabled", false);
-  }
-  
-  deactivatePurchaseButton(index)
-  {
-    console.log($(this._purchaseButtons[index]));
-    console.log($(this._purchaseButtons[index]).attr("disabled"));
-  }*/
 }
