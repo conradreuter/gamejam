@@ -7,23 +7,50 @@ export default class UI
   {
     this._purchaseButtons = Array.from($('.purchase-tower'));
     this.resetValues();
-    //this.deactivatePurchaseButton(1);
 
+    var self = this;
     this._purchaseButtons.forEach(function(button)
     {
       let id = button.id;
+      let costs = 0;
+      
       button.onclick = function()
       {
         if(Wall.selection)
         {
           switch(id)
           {
-            case "normal": {Wall.selection.buildTower(Tower.Normal); break}
-            case "ice": {Wall.selection.buildTower(Tower.Ice); break}
-            case "fire": {Wall.selection.buildTower(Tower.Fire); break}
-            case "lightning": {Wall.selection.buildTower(Tower.Lightning); break}
-            case "freeze": {Wall.selection.buildTower(Tower.Freeze); break}
+            case "normal": {
+              Wall.selection.buildTower(Tower.Normal);
+              costs = self.getTowerCosts(0);
+              break
+            }
+            case "ice": {
+              Wall.selection.buildTower(Tower.Ice);
+              costs = self.getTowerCosts(1);
+              break
+            }
+            case "fire": {
+              Wall.selection.buildTower(Tower.Fire);
+              costs = self.getTowerCosts(2);
+              break
+            }
+            case "lightning": {
+              Wall.selection.buildTower(Tower.Lightning);
+              costs = self.getTowerCosts(3);
+              break
+            }
+            case "freeze": {
+              Wall.selection.buildTower(Tower.Freeze);
+              costs = self.getTowerCosts(4);
+              break
+            }
+            default: {
+              return;
+            }
           }
+          
+          $gui.onPurchaseTower(costs);
           
         }
       };
@@ -34,18 +61,14 @@ export default class UI
   resetValues()
   {
     this.setLives(0);
-    this.setCoins(0);
+    
     this.setKillCount(0);
-    this.setTowerPrice(0, 0);
-    this.setTowerPrice(1, 0);
-    this.setTowerPrice(2, 0);
-    this.setTowerPrice(3, 0);
-    this.setTowerPrice(4, 0);
-    /*this.setTowerExperience("progress_0", 0);
-    this.setTowerExperience("progress_1", 0);
-    this.setTowerExperience("progress_2", 0);
-    this.setTowerExperience("progress_3", 0);
-    this.setTowerExperience("progress_4", 0);*/
+    this.setTowerPrice(0, 1);
+    this.setTowerPrice(1, 5);
+    this.setTowerPrice(2, 10);
+    this.setTowerPrice(3, 15);
+    this.setTowerPrice(4, 20);
+    this.setCoins(10);
   }
   
   setLives(value)
@@ -106,7 +129,7 @@ export default class UI
     return parseInt(value) || Math.max;
   }
   
-  setTowerExperience(towertype, value)
+  /*setTowerExperience(towertype, value)
   {
     $('#'+towertype)
       .progress({
@@ -116,7 +139,7 @@ export default class UI
         active: '{value} of {total} done'
       }
     });
-  }
+  }*/
   
   getTowerCosts(type)
   {
@@ -150,13 +173,15 @@ export default class UI
     {
       let button = this._purchaseButtons[index];
       let price = this.getTowerPrice(index);
+      console.log(index, $(button).isEnabled);
+      
       if(coins < price)
       {
-        $(button).isEnabled = false;
+        $(button).addClass("disabled");
       }
       else
       {
-        $(button).isEnabled = true;
+        $(button).removeClass("disabled");
       }
     }
   }
