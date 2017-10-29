@@ -38,14 +38,14 @@ export default class Enemy extends Entity {
 
   destroy() {
     this.sprite.destroy()
-    $gui.increaseKillCount();
+    $gui.increaseKillCount()
   }
 
   update() {
     this.sprite.alpha = .5 + .5 * (this.lives / $constants.ENEMY_LIVES)
 
     if (this.accelerate > 0) {
-      this.accelerate -= ($game.time.now - this.startTime)%2 
+      this.accelerate -= ($game.time.now - this.startTime)%2
       this.speed = $constants.ENEMY_SPEED*2
     } else if (this.accelerate < 0) {
       this.accelerate += ($game.time.now - this.startTime)%2

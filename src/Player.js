@@ -61,26 +61,12 @@ export default class Player extends Entity {
 
   gainLife() {
     ++this.lives
+    $gui.setLives(this.lives)
   }
 
-  collectCoin() {
+  collectCoins() {
     ++this.coins
-  }
-
-  fireItem() {
-    this.coins += 3
-  }
-
-  iceItem() {
-    this.coins += 3
-  }
-
-  lightningItem() {
-    this.coins += 3
-  }
-
-  frozenItem() {
-    this.coins += 3
+    // TODO inform UI
   }
 
   speedItem() {
