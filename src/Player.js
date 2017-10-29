@@ -33,7 +33,9 @@ export default class Player extends Entity {
 
   update() {
     $game.physics.arcade.collide(this.sprite, Wall.layer)
-    $game.physics.arcade.overlap(this.sprite, Path.layer, this.collide)
+    Path.resetPlayerDistances()
+    Path.forSprite(this.sprite).setPlayerDistance(0)
+
     const cursors = $game.input.keyboard.createCursorKeys()
     if (this.accelerate > 0) {
       this.accelerate -= ($game.time.now - this.startTime)%2
