@@ -34,11 +34,14 @@ export default class Enemy extends Entity {
     this.slowDuration = 1
     this.freezeDuration = 0.5
     this.burnDuration = 0.2
+    
+    $gui.increaseEnemyCount();
   }
 
   destroy() {
     this.sprite.destroy()
     $gui.increaseKillCount();
+    $gui.decreaseEnemyCount();
   }
 
   update() {
